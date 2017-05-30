@@ -1,4 +1,4 @@
-﻿## ![Logo](..\Logo.png) PTR Viewer Manual
+﻿## ![Logo](../Logo.png) PTR Viewer Manual
 
 For PTR manual go [here](../README.md).
 
