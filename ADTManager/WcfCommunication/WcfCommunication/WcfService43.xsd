@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ADTService.WcfCommunication" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ADTService.WcfCommunication" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/PTR/WcfService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ADTServiceOnConnectData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Consoles" nillable="true" type="tns:ArrayOfADTServiceOnConnectData.ConsoleLog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ADTServiceOnConnectData" nillable="true" type="tns:ADTServiceOnConnectData" />
+  <xs:complexType name="ArrayOfADTServiceOnConnectData.ConsoleLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ADTServiceOnConnectData.ConsoleLog" nillable="true" type="tns:ADTServiceOnConnectData.ConsoleLog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfADTServiceOnConnectData.ConsoleLog" nillable="true" type="tns:ArrayOfADTServiceOnConnectData.ConsoleLog" />
+  <xs:complexType name="ADTServiceOnConnectData.ConsoleLog">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Lines" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ADTServiceOnConnectData.ConsoleLog" nillable="true" type="tns:ADTServiceOnConnectData.ConsoleLog" />
+</xs:schema>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb2e3ce8d8dd41729b18760749f86008" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="PTRModel.ADDrive" Width="1.5" PointX="7.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.ADFolderAccess" Width="1.875" PointX="3.375" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.ADFolder" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.ADUser" Width="1.5" PointX="1" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IFunction_import" Width="1.5" PointX="13.625" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IFunctionAccess_import" Width="1.5" PointX="11.625" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IFunctionAccess" Width="1.5" PointX="3.125" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IFunction" Width="1.5" PointX="5.125" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.ImportReport" Width="1.5" PointX="12.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IQuest_import" Width="1.5" PointX="15.625" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IQuestAccess_import" Width="1.5" PointX="13.625" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IQuestAccess" Width="1.625" PointX="5.125" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.IQuest" Width="1.5" PointX="7.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.ISDAVSUser_import" Width="1.5" PointX="9.625" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.ISDAVSUser" Width="1.5" PointX="1.125" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.PVEmploee_import" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.PVEmploee" Width="1.5" PointX="3.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.PVHistEmploee" Width="1.5" PointX="7.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.PVProfession" Width="1.5" PointX="5.625" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.PVStructural_import" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.PVStructural" Width="1.75" PointX="5.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.sysdiagram" Width="1.5" PointX="19.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTRModel.UUser" Width="1.5" PointX="1" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="PTRModel.FK_ADDriveADFolder" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_ADFolderAccessADFolderAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_ADFolderADFolderAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_ADUserADFolderAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_ADParentFolderADFolder" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_UUserADUser" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_FunctionAccessFunction" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_FunctionAccessQuestAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_ISDAVS_UserFunctionAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_QuestAccessQuest" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_UUserISDAVSUser" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_PV_EmploeePV_HistEmploee" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_PV_ProfessionPV_Emploee" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_UUserPVEmploee" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.FK_PV_ProfessionPV_HistEmploee" ManuallyRouted="false" />
+        <AssociationConnector Association="PTRModel.PVStructuralPVStructural" />
+        <AssociationConnector Association="PTRModel.PVEmploeePart" />
+        <AssociationConnector Association="PTRModel.PVEmploeeDepartment" />
+        <AssociationConnector Association="PTRModel.PartPVHistEmploee" />
+        <AssociationConnector Association="PTRModel.DepartmentPVHistEmploee" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

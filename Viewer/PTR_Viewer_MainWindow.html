@@ -1,0 +1,19 @@
+﻿<h2 id="main-window">Main Window</h2>
+<p>For PTR Viewer Manual go <a href="PTR_Viewer_Manual.md">here</a>.</p>
+<h3 id="views">Views</h3>
+<p>This is a Main window of a program. It was intended to make one  window for all the activity. It has few views, they are:</p>
+<ul>
+<li>User View</li>
+<li>Merge View</li>
+<li>Function View</li>
+<li>Folder View</li>
+</ul>
+<p>It was decided not to use tab control, since it constrains to its style, instead each view is a grid wich visibility is bound to <a href="PTR_Viewer_MainViewModel.md">MainViewModel's</a> view visibility parameter (e.g. <a href="MainViewModel.cs">UserViewVisibility</a>). Whole window uses one ViewModel, because many controls in different Views use same data and it is not effective to duplicate that functionality over many ViewModels. It gets messy when deprecated code is left there, so it is worth to wach over it and clean it and optimize it frequently. <em>First there was a try to use different ViewModels for each View, but it was not a good idea, because code got too fractured, hard to maintain.</em></p>
+<p>So, to change a View in a Designer change this line:</p>
+<blockquote>
+<p><a href="MainWindow.xaml">MainWindow.xaml</a>:23 &lt;main:MainViewModel x:Key=&quot;TestViewModel&quot; CurrentView=&quot;UserView&quot; ReportsVisibility=&quot;Collapsed&quot; MergeUUserFilter=&quot;a&quot;/&gt;</p>
+</blockquote>
+<p>Setting CurrentView to any other, will be visible only in a Designer. The default UserView is set in a MainViewModel's <a href="PTR_Viewer_MainViewModel.md#constructor">constructor</a>. The program itself ignores it and instantiates a working ViewModel in <a href="App.xaml.cs">App.xaml.cs</a></p>
+<h3 id="modernui-window">ModernUI Window</h3>
+<p>Because of numerous issues that rises when trying to create a custom styled window (setting WindowStyle to None and recreating it's usual behaviour) is too complicated and should have different solutions for differeent OSes and many solutions on the net are outdated and no longer working, it was decided to use an out of box solution. MahApp and MUI were studied. MahApp had a ready to modify clean window, but it had a heavy lag when resizing. The MUI was a Metro styled window with it's own way to organize things, it is light and easy to modify. It was decided to use MUI. The <a href="Resources/StripoutModernUI.xaml">StripoutModernUI.xaml</a> has a ModernWindow template that strips out all ModernUI styling and lets start from a clean and properly behaving window. It uses a previously created WindowButtons custom control with commands behaviour copied from MUI templates. Thus saving old window style.</p>
+<p>Window position, size and view persistence between sessions is in <a href="MainWindow.xaml.cs">MainWindow.xaml.cs</a></p>

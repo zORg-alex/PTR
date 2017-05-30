@@ -1,0 +1,1 @@
+﻿metadata=res://*/PTREDM.csdl|res://*/PTREDM.ssdl|res://*/PTREDM.msl;provider=System.Data.SqlClient;provider connection string='data source=sqlb\sqlb;initial catalog=PTR;persist security info=True;user id=PTR_generic;password=&quot;AGXM97mm)a&quot;;MultipleActiveResultSets=True;App=EntityFramework'

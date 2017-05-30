@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A726FE09-76B3-4AEA-9E02-0EE1EFA798D4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PTR.PTRLib</RootNamespace>
+    <AssemblyName>PTRLib</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\Viewer\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeOpenXml.Core.ExcelPackage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OfficeOpenXml.Core.ExcelPackage.1.0.0\lib\net46\OfficeOpenXml.Core.ExcelPackage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ADDrive.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADFolder.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADFolderAccess.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADUser.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoolNegationConverter.cs" />
+    <Compile Include="Common\DateTimeExtension.cs" />
+    <Compile Include="GetGroupedPVStructurals1_Result.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetGroupedPVStructurals1_Result1.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetGroupedPVStructurals_Result.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IFunction.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IFunctionAccess.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IFunctionAccess_import.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IFunction_import.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportReport.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IQuest.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IQuestAccess.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IQuestAccess_import.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IQuest_import.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISDAVSUser.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISDAVSUser_import.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ISelectable.cs" />
+    <Compile Include="Common\LatinToASCIIConverter.cs" />
+    <Compile Include="Common\Notifiable.cs" />
+    <Compile Include="Common\PackUriHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PTREDM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PTREDM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PTREDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PTREDM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PTREDM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\PTRContext.cs" />
+    <Compile Include="Classes\ADDrive.cs" />
+    <Compile Include="Classes\ADFolder.cs" />
+    <Compile Include="Classes\ADFolderAccess.cs" />
+    <Compile Include="Classes\ADUser.cs" />
+    <Compile Include="Classes\CommonEmploee.cs" />
+    <Compile Include="Classes\CommonUser.cs" />
+    <Compile Include="Classes\IFunction.cs" />
+    <Compile Include="Classes\IFunctionAccess.cs" />
+    <Compile Include="Classes\ImportReport.cs" />
+    <Compile Include="Classes\IQuest.cs" />
+    <Compile Include="Classes\IQuestAccess.cs" />
+    <Compile Include="Classes\ISDAVSUser.cs" />
+    <Compile Include="Classes\PVEmploee.cs" />
+    <Compile Include="Classes\PVNode.cs" />
+    <Compile Include="PVEmploeeToUUserDataConverter.cs" />
+    <Compile Include="Classes\PVHistEmploee.cs" />
+    <Compile Include="Classes\PVProfession.cs" />
+    <Compile Include="Classes\PVStructural.cs" />
+    <Compile Include="UVMCommandHost.cs" />
+    <Compile Include="Classes\UUser.cs" />
+    <Compile Include="UVMCommand.cs" />
+    <Compile Include="PVEmploee.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PVEmploee_import.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PVHistEmploee.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PVProfession.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PVStructural.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PVStructural_import.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateAll_Result.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UUser.cs">
+      <DependentUpon>PTREDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EPPExporter.cs" />
+    <Compile Include="ExportViewModel.cs" />
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="TestData.cs" />
+    <Compile Include="PTRLibSettings.Designer.cs">
+      <DependentUpon>PTRLibSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="PTREDM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PTREDM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PTREDM.edmx.diagram">
+      <DependentUpon>PTREDM.edmx</DependentUpon>
+    </None>
+    <None Include="PTRLibSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>PTRLibSettings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PTREDM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PTREDM.edmx</DependentUpon>
+      <LastGenOutput>PTREDM.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PTREDM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PTREDM.edmx</DependentUpon>
+      <LastGenOutput>PTREDM.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,23 @@
+﻿<Application x:Class="PTR.Viewer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PTR.Viewer"
+             xmlns:c="clr-namespace:PTR.Viewer.CustomControls"
+             xmlns:s="clr-namespace:PTR.PTRLib;assembly=PTRLib">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml"/>
+                <ResourceDictionary Source="Resources/StripoutModernUI.xaml"/>
+                <ResourceDictionary Source="Resources/Icons.xaml"/>
+                <ResourceDictionary Source="Themes/Generic.xaml"/>  <!--Default Styles--> 
+				<ResourceDictionary Source="Themes/BasicTheme.xaml"/> <!-- ColorTemplates -->
+			</ResourceDictionary.MergedDictionaries>
+			
+			<BooleanToVisibilityConverter x:Key="bool2VisibilityConverter"/>
+			<c:ColorOpacityConverter x:Key="ColorOpacityConverter"/>
+            <c:PathToDrawingBrushConverter x:Key="PathToDrawingBrushConverter"/>
+
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

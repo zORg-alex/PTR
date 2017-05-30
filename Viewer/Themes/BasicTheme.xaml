@@ -1,0 +1,570 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:main="clr-namespace:PTR.Viewer"
+                    xmlns:c="clr-namespace:PTR.Viewer.CustomControls"
+                    xmlns:s="clr-namespace:PTR.PTRLib;assembly=PTRLib"
+                    xmlns:e="clr-namespace:EffectLibrary;assembly=EffectLibrary"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:m="System.Widows.Media.Geometry"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+    <!--<ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>-->
+    <c:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+    <c:BrushOverlayConverter x:Key="BrushOverlayConverter"/>
+    <c:RemainderConverter x:Key="RemainderConverter"/>
+    <c:ColorOpacityConverter x:Key="ColorOpacityConverter"/>
+    <c:ColorOverlayConverter x:Key="ColorOverlayConverter"/>
+    <c:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter"/>
+    <c:InvertBoolConverter x:Key="InvertBoolConverter"/>
+    <c:AnyToBoolConverter x:Key="AnyToBoolConverter"/>
+    <s:UVMCommandHostToUVMCommandConverter x:Key="UVMCommandHostToUVMCommandConverter"/>
+
+    <!-- http://paletton.com/#uid=c3x0I1b0f0ktouf3dSsiVy7-ll8STav -->
+
+    <SolidColorBrush x:Key="Pallete.Primary" Color="#FF16619B"/>
+    <SolidColorBrush x:Key="Pallete.Primary.Darker" Color="#FF06406C"/>
+    <SolidColorBrush x:Key="Pallete.Primary.Darkest" Color="#FF011F36"/>
+    <SolidColorBrush x:Key="Pallete.Primary.Brighter" Color="#FF4C81AA"/>
+    <SolidColorBrush x:Key="Pallete.Primary.Brightest" Color="#FFD1DDE7"/>
+
+    <SolidColorBrush x:Key="Pallete.Complementary" Color="#FFF19214"/>
+    <SolidColorBrush x:Key="Pallete.Complementary.Darker" Color="#FFA86000"/>
+    <SolidColorBrush x:Key="Pallete.Complementary.Darkest" Color="#FF543000"/>
+    <SolidColorBrush x:Key="Pallete.Complementary.Brighter" Color="#FFBF68"/>
+    <SolidColorBrush x:Key="Pallete.Complementary.Brightest" Color="#FFF4E5"/>
+
+    <SolidColorBrush x:Key="Pallete.Secondary" Color="#F1BA14"/>
+    <SolidColorBrush x:Key="Pallete.Secondary.Darker" Color="#A87E00"/>
+    <SolidColorBrush x:Key="Pallete.Secondary.Darkest" Color="#543F00"/>
+    <SolidColorBrush x:Key="Pallete.Secondary.Brighter" Color="#FFD968"/>
+    <SolidColorBrush x:Key="Pallete.Secondary.Brightest" Color="#FFF9E5"/>
+
+    <SolidColorBrush x:Key="Pallete.Tretiary" Color="#F15314"/>
+    <SolidColorBrush x:Key="Pallete.Tretiary.Darker" Color="#A83000"/>
+    <SolidColorBrush x:Key="Pallete.Tretiary.Darkest" Color="#541800"/>
+    <SolidColorBrush x:Key="Pallete.Tretiary.Brighter" Color="#FF9368"/>
+    <SolidColorBrush x:Key="Pallete.Tretiary.Brightest" Color="#FFEDE5"/>
+
+    <!--<SolidColorBrush x:Key="Pallete.Page" Color="#FFdee8f2"/>
+    <SolidColorBrush x:Key="Pallete.Bright" Color="#FFebeff4"/>-->
+
+    <Style x:Key="zButtonTemplatedStyle" TargetType="{x:Type c:zButton}" BasedOn="{StaticResource DefaultEmptyZButtonStyle}">
+        <Setter Property="Background" Value="{DynamicResource Pallete.Primary}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Pallete.Primary.Darker}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Pallete.Primary.Brightest}"/>
+        <Setter Property="Highlight" Value="{Binding ConverterParameter=0.2, Converter={StaticResource ColorOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Primary.Brightest}}"/>
+        <Setter Property="Pressed" Value="{Binding ConverterParameter=0.2, Converter={StaticResource ColorOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Primary.Darkest}}"/>
+    </Style>
+
+    <Style x:Key="zButtonTemplatedEmptyStyle" TargetType="{x:Type c:zButton}" BasedOn="{StaticResource DefaultEmptyZButtonStyle}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Pallete.Primary.Darkest}"/>
+        <Setter Property="Highlight" Value="{Binding ConverterParameter=0.2, Converter={StaticResource ColorOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Primary.Brightest}}"/>
+        <Setter Property="Pressed" Value="{Binding ConverterParameter=0.2, Converter={StaticResource ColorOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Primary.Darkest}}"/>
+    </Style>
+
+    <Style  TargetType="{x:Type c:zButton}" BasedOn="{StaticResource zButtonTemplatedStyle}"/>
+
+    <!-- SCROLL VIEWER -->
+    <Style TargetType="ScrollViewer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}" d:DesignWidth="170.131" d:DesignHeight="145.514" ScrollViewer.HorizontalScrollBarVisibility="Visible" ClipToBounds="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ScrollContentPresenter
+                            x:Name="PART_ScrollContentPresenter"
+                            CanContentScroll="{TemplateBinding CanContentScroll}"
+                            CanHorizontallyScroll="False" CanVerticallyScroll="False"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Content="{TemplateBinding Content}"
+                            Margin="{TemplateBinding Padding}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                        <Border BorderBrush="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0,10" Margin="0,-5">
+                            <Border.Effect>
+                                <BlurEffect Radius="10"/>
+                            </Border.Effect>
+                        </Border>
+                        <ScrollBar
+                            x:Name="PART_VerticalScrollBar"
+                            AutomationProperties.AutomationId="VerticalScrollBar"
+                            Cursor="Arrow" Grid.Column="1"
+                            Maximum="{TemplateBinding ScrollableHeight}"
+                            Minimum="0" Grid.Row="0"
+                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                            Opacity="0"
+                            Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                            ViewportSize="{TemplateBinding ViewportHeight}"
+                            Style="{DynamicResource ScrollBar}"/>
+                        <ScrollBar
+                            x:Name="PART_HorizontalScrollBar"
+                            Orientation="Horizontal"
+                            AutomationProperties.AutomationId="HorizontalScrollBar"
+                            Cursor="Arrow" Grid.Column="0"
+                            Maximum="{TemplateBinding ScrollableWidth}"
+                            Minimum="0" Grid.Row="1"
+                            Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                            Opacity="0"
+                            Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                            ViewportSize="{TemplateBinding ViewportWidth}"
+                            Style="{DynamicResource ScrollBar}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:30" Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity" To="100"/>
+                                        <DoubleAnimation Duration="0:0:30" Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity" To="100"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.300" Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity" To="0"/>
+                                        <DoubleAnimation Duration="0:0:0.300" Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity" To="0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+
+                        <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="true">
+                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="{Binding RelativeSource={RelativeSource Self}, Path= ComputedVerticalScrollBarVisibility}"/>
+                            
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity" From="0" To="100" Duration="0:1:0"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity" From="1000" To="0" Duration="0:1:0"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="true">
+                            <Setter TargetName="PART_HorizontalScrollBar" Property="Visibility" Value="{Binding RelativeSource={RelativeSource Self}, Path= ComputedHorizontalScrollBarVisibility}"/>
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity" From="0" To="100" Duration="0:1:0"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity" From="100" To="0" Duration="0:1:0"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ScrollBar" TargetType="{x:Type ScrollBar}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Effect" Value="{DynamicResource ThemeShallowShadowEffect}"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="Height" Value="8" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid >
+                                <Track 
+				                    x:Name="PART_Track"
+				                    Grid.Row="1"
+				                    IsDirectionReversed="False">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Visibility="Hidden" Command="ScrollBar.PageUpCommand" />
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Style="{DynamicResource ScrollBarThumb}" Margin="1,0,1,0"/>
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Visibility="Hidden" Command="ScrollBar.PageDownCommand" />
+                                    </Track.IncreaseRepeatButton>
+                                </Track>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Width" Value="8"/>
+                <Setter Property="Height" Value="Auto" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid >
+                                <Track 
+				                    x:Name="PART_Track"
+				                    Grid.Column="1"
+				                    IsDirectionReversed="True">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageLeftCommand" Background="{x:Null}" BorderBrush="{x:Null}" />
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Style="{DynamicResource ScrollBarThumb}" Margin="0,1,0,1"/>
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton  Command="ScrollBar.PageRightCommand" Background="{x:Null}" BorderBrush="{x:Null}" />
+                                    </Track.IncreaseRepeatButton>
+                                </Track>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border 
+						CornerRadius="0"
+						Background="#66000000"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type c:Icon}" BasedOn="{StaticResource DefaultIconStyle}" x:Key="FolderIconStyle">
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="IconShape" Value="{DynamicResource z.Folder}"/>
+        <Setter Property="AltIconShape" Value="{DynamicResource z.FolderOpen}"/>
+        <Setter Property="SetAltIcon" Value="{Binding IsExpanded}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Status}" Value="False">
+                <Setter Property="IconShape" Value="{DynamicResource z.FolderDeleted}"/>
+                <Setter Property="AltIconShape" Value="{DynamicResource z.FolderOpenDeleted}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ThemedTreeView" TargetType="{x:Type TreeView}" BasedOn="{StaticResource DefaultTreeView}">
+        <Setter Property="Background" Value="{StaticResource Pallete.Primary.Brighter}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Pallete.Primary.Darker}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="ItemContainerStyle" Value="{DynamicResource TreeViewItemStyle}"/>
+        <Setter Property="AlternationCount" Value="2"/>
+    </Style>
+
+    <Style TargetType="{x:Type TreeView}" BasedOn="{StaticResource ThemedTreeView}"/>
+
+    <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+        <Setter Property="c:TreeViewItemBehavior.IsBroughtIntoViewWhenSelected" Value="True"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+        <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="19" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border x:Name="Bg" Background="{TemplateBinding Background}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                            <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding IsExpanded, Mode=TwoWay}" Style="{DynamicResource ExpandCollapseToggleStyle}"/>
+                            <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Grid.Column="1"/>
+                            <Border x:Name="ItemsHost" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" Margin="2">
+                                <ItemsPresenter/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="false">
+                            <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="Bg" Property="Effect">
+                                <Setter.Value>
+                                    <e:OverlayEffect BlendSolidBrush="{Binding ConverterParameter=0.3, Converter={StaticResource BrushOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Complementary.Brighter}}"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="IsSelectionActive" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Bg" Property="Effect">
+                                <Setter.Value>
+                                    <e:OverlayEffect BlendSolidBrush="{Binding ConverterParameter=0.3, Converter={StaticResource BrushOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Secondary.Brighter}}"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Bd" Property="Effect">
+                                <Setter.Value>
+                                    <e:DesaturateEffect DesaturationFactor="0.25"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="AlternationIndex" Value="1">
+                            <Setter TargetName="Bd" Property="Effect">
+                                <Setter.Value>
+                                    <e:OverlayEffect BlendSolidBrush="{Binding ConverterParameter=0.3, Converter={StaticResource BrushOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Primary.Brightest}}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Depth, ConverterParameter=2, Converter={StaticResource RemainderConverter}, FallbackValue=0}" Value="1"/>
+                                <Condition Binding="{Binding AlternationCount, Converter={StaticResource AnyToBoolConverter}, ConverterParameter=0, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter TargetName="Bg" Property="Background" Value="{Binding Background, Converter={StaticResource BrushOverlayConverter}, ConverterParameter='#FF555555', RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}"/>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="NonSelectableTreeViewItemStyle" TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource TreeViewItemStyle}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsSelected" Value="False"/>
+    </Style>
+
+    <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Background="Transparent" Height="16" Padding="5,5,5,5" Width="16">
+                        <Path x:Name="ExpandPath" Data="M0,0 L0,6 L6,0 z" Fill="#FF595959" Stroke="#FF262626">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="135" CenterY="3" CenterX="3"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="RenderTransform" TargetName="ExpandPath">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180" CenterY="3" CenterX="3"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF818181"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF27C7F7"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="#FFCCEEFB"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF1CC4F7"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="#FF82DFFB"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style TargetType="{x:Type c:ADFolderTreeView}">
+        <Setter Property="ADFolderTemplate">
+            <Setter.Value>
+                <HierarchicalDataTemplate DataType="{x:Type s:ADFolder}" ItemsSource="{Binding SubFolders}">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Open in Folde View"
+                                      Command="{Binding Commands, ConverterParameter=comShowInFolderView, Converter={StaticResource UVMCommandHostToUVMCommandConverter}}"
+                                      CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <c:Icon Style="{StaticResource FolderIconStyle}" Margin="5,0" Width="16" Height="16"/>
+                        <TextBlock Text="{Binding Name}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Status}" Value="False">
+                                            <Setter Property="Foreground" Value="{DynamicResource WhiteStyle.Disabled.Foreground}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DropShadowEffect x:Key="ThemeShadowEffect" BlurRadius="4" Direction="270" Opacity="0.5" ShadowDepth="2" />
+    
+    <DropShadowEffect x:Key="ThemeShallowShadowEffect" BlurRadius="2" Direction="270" Opacity="0.5" ShadowDepth="1" />
+
+    <Style TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="{StaticResource Pallete.Primary.Brighter}"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ItemContainerStyle" Value="{DynamicResource TemplatedListBoxItem}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Border x:Name="Bd" Padding="0" SnapsToDevicePixels="true">
+                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Effect" TargetName="Bd">
+                                <Setter.Value>
+                                    <e:DesaturateEffect DesaturationFactor=".25"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="TemplatedListBoxItem" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"/>
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"/>
+        <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="4,1"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="Bd" SnapsToDevicePixels="true" Margin="0,1">
+                        <Border x:Name="Bd2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Effect" TargetName="Bd">
+                                <Setter.Value>
+                                    <e:OverlayEffect Blend="#44FFFFFF"/>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Effect" TargetName="Bd">
+                                <Setter.Value>
+                                    <e:DesaturateEffect DesaturationFactor=".25"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Effect" TargetName="Bd2">
+                                <Setter.Value>
+                                    <e:OverlayEffect BlendSolidBrush="{Binding ConverterParameter=.5, Converter={StaticResource BrushOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Complementary.Brighter}}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

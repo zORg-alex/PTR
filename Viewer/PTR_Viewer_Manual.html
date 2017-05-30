@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Logo PTR Viewer Manual</title>
+</head>
+<body>
+
+    <h2 id="logo-ptr-viewer-manual"><img src="..%5CLogo.png" alt="Logo" /> PTR Viewer Manual</h2>
+<p>For PTR manual go <a href="../README.md">here</a>.</p>
+<p>This is a <strong>Windows Presentation Foundation</strong> project. It connects to a
+PTR database and presents it's data to an administrator to overview
+and export user data.</p>
+<p>It is constructed on <strong>MVVM pattern</strong> (Model-ViewModel-View)</p>
+<ul>
+<li><strong>Model</strong> is a database and all classes used to model data.</li>
+<li><strong>ViewModel</strong> classes are called *ViewModel.cs to distinguish them.
+This is what every Window and many controls get as DataContext.</li>
+<li><strong>Views</strong> are all Windows and CustomControls that are named
+appropriately or stored in same named folder.</li>
+</ul>
+<p>They communicate this way Vivew &lt;--&gt; ViewModel are interconnected,
+and ViewModel --&gt; Model.</p>
+<p>MVVM pattern helps to keep project flexible and easy to understand.
+Since it is a big project it is better to keep it structured and
+junk free.</p>
+<blockquote>
+<p>TODO create a WIP project and Clean project to wreck a
+havok in WIP one and copy (once in a while) only necessary code to a
+Clean one. Will it work better? It helped a lot to rewrite whole
+project and strip out unnecessary and deprecated code once it was
+barely readable. BTW since then this stricture is as it is.</p>
+</blockquote>
+<p>This project consists of:</p>
+<ul>
+<li><a href="PTR_Viewer_MainWindow.md">MainWindow</a></li>
+<li><a href="">ExportWindow</a></li>
+<li><a href="">CustomControls</a></li>
+<li><a href="PTR_Viewer_MainViewModel.md">MainViewModel</a></li>
+<li><a href="">Exporter</a></li>
+</ul>
+
+
+</body>
+</html>

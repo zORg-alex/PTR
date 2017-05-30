@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config delay="101">
+	<!-- both paths should end with '\' -->
+	<!--<dir path="G:\" pathDB="G:\"/>-->
+	<!--<dir path="X:\" pathDB="X:\"/>-->
+	<dir path="C:\Users\AUljanovs\Desktop\New folder\" pathDB="Y:\"/>
+</config>

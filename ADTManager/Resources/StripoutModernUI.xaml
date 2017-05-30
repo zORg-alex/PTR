@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls;assembly=FirstFloor.ModernUI"
+                    xmlns:modernui="clr-namespace:FirstFloor.ModernUI;assembly=FirstFloor.ModernUI"
+					xmlns:ccon="clr-namespace:ADTManager.CustomControls">
+
+	<Style x:Key="EmptyModernWindowStyle" TargetType="{x:Type controls:ModernWindow}">
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Template" Value="{DynamicResource EmptyModernWindow}"/>
+	</Style>
+	<ControlTemplate x:Key="EmptyModernWindow" TargetType="{x:Type controls:ModernWindow}">
+		<Border x:Name="WindowBorder" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}}" Margin="{Binding Margin, RelativeSource={RelativeSource TemplatedParent}}" Padding="{Binding Padding, RelativeSource={RelativeSource TemplatedParent}}">
+			<Grid x:Name="LayoutRoot">
+				<ContentPresenter/>
+				<!-- window system buttons-->
+				<!--<StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right">
+					<ccon:OverlayedButton Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}" ToolTip="{x:Static modernui:Resources.Minimize}"
+										  BorderThickness="0" Width="32" Background="#FFDDDDDD" Height="20" Highlight="#7FB2B2B2" Pressed="#7F5B5B5B">
+						<ccon:OverlayedButton.Content>
+							<Grid Width="13" Height="12" RenderTransform="1,0,0,1,0,1">
+								<Path Data="M0,6 L8,6 Z" Width="8" Height="7" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="2" Stroke="White"  />
+							</Grid>
+						</ccon:OverlayedButton.Content>
+					</ccon:OverlayedButton>
+					<Grid Margin="1,0,1,0">
+						<ccon:OverlayedButton x:Name="Restore" Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" ToolTip="{x:Static modernui:Resources.Restore}" Visibility="Hidden"
+										      BorderThickness="0" Width="32" Background="#FFDDDDDD" Height="20" Highlight="#7FB2B2B2" Pressed="#7F5B5B5B">
+							<ccon:OverlayedButton.Content>
+								<Grid Width="13" Height="12" UseLayoutRounding="True" RenderTransform="1,0,0,1,.5,.5">
+									<Path Data="M2,0 L8,0 L8,6 M0,3 L6,3 M0,2 L6,2 L6,8 L0,8 Z" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="1" Stroke="White"  />
+								</Grid>
+							</ccon:OverlayedButton.Content>
+						</ccon:OverlayedButton>
+						<ccon:OverlayedButton x:Name="Maximize" Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}" ToolTip="{x:Static modernui:Resources.Maximize}"
+										      BorderThickness="0" Width="32" Background="#FFDDDDDD" Height="20" Highlight="#7FB2B2B2" Pressed="#7F5B5B5B">
+							<ccon:OverlayedButton.Content>
+								<Grid Width="13" Height="12">
+									<Path Data="M0,1 L9,1 L9,8 L0,8 Z" Width="9" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="2" Stroke="White"  />
+								</Grid>
+							</ccon:OverlayedButton.Content>
+						</ccon:OverlayedButton>
+					</Grid>
+					<ccon:OverlayedButton Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}" ToolTip="{x:Static modernui:Resources.Close}"
+										  BorderThickness="0" Width="32" Background="#FFDD8888" Height="20" Highlight="#ffFFCB96" Pressed="#ff511414">
+						<ccon:OverlayedButton.Content>
+							<Grid Width="13" Height="12" RenderTransform="1,0,0,1,0,1">
+								<Path Data="M0,0 L8,7 M8,0 L0,7 Z" Width="8" Height="7" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="1.5" Stroke="White"  />
+							</Grid>
+						</ccon:OverlayedButton.Content>
+					</ccon:OverlayedButton>
+				</StackPanel>-->
+				<ccon:WindowButtons/>
+
+				<!-- resize grip -->
+				<Grid Grid.Row="1" x:Name="ResizeGrip" Background="Transparent" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Bottom" WindowChrome.ResizeGripDirection="BottomRight">
+					<Path Width="12" Height="12" Margin="1" 
+                                              Stroke="{DynamicResource WindowText}"
+                                              StrokeThickness="1"
+                                              Stretch="None"
+                                              Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3" />
+				</Grid>
+			</Grid>
+		</Border>
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsActive" Value="True">
+				<Setter Property="BorderBrush" Value="{DynamicResource WindowBorderActive}" />
+			</Trigger>
+			<Trigger Property="WindowState" Value="Maximized">
+				<!--<Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+				<Setter TargetName="Restore" Property="Visibility" Value="Visible" />-->
+				<Setter TargetName="WindowBorder" Property="BorderThickness" Value="7,7,7,7" />
+			</Trigger>
+			<!--<Trigger Property="WindowState" Value="Normal">
+				<Setter TargetName="Maximize" Property="Visibility" Value="Visible" />
+				<Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+			</Trigger>-->
+			<MultiTrigger>
+				<MultiTrigger.Conditions>
+					<Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+					<Condition Property="WindowState" Value="Normal" />
+				</MultiTrigger.Conditions>
+				<Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
+			</MultiTrigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+</ResourceDictionary>

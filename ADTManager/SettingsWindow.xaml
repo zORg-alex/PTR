@@ -1,0 +1,55 @@
+﻿<Window x:Class="ADTManager.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:main="clr-namespace:ADTManager"
+        xmlns:ccon="clr-namespace:ADTManager.CustomControls"
+        mc:Ignorable="d"
+        Title="ExportMenu" Width="300"
+		MouseEnter="ExportMenuWindow_MouseEnter" MouseLeave="ExportMenuWindow_MouseLeave" LostKeyboardFocus="ExportMenuWindow_LostKeyboardFocus"
+		WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        BorderBrush="{DynamicResource WhiteStyle.Highlight.B}"
+        BorderThickness="3" KeyDown="ExportMenuWindow_KeyDown"
+        HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SizeToContent="WidthAndHeight" MinWidth="300" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowsTransparency="True" WindowStyle="None">
+	<WindowChrome.WindowChrome>
+		<WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=Header}" ResizeBorderThickness="4" CornerRadius="0" GlassFrameThickness="0"/>
+	</WindowChrome.WindowChrome>
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Resources/Icons_Small.xaml"/>
+				<ResourceDictionary Source="Resources/WhiteStyleRes.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		</ResourceDictionary>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<TextBlock Text="ADT Manager Options" FontSize="22" TextDecorations="{x:Null}" TextAlignment="Center" Margin="0,10" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="2"/>
+		<StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="5">
+			<UniformGrid Columns="2">
+				<TextBlock Text="Name"/>
+				<TextBox Text="{Binding HostName}"/>
+			</UniformGrid>
+			<TextBlock ToolTip="Click to check if it works">
+				<TextBlock Text="Address:"/>
+				<TextBlock Text="http://" TextDecorations="Underline" Foreground="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" PreviewMouseDown="AddressTextBlock_PreviewMouseDown" Cursor="Hand"/>
+				<TextBox Text="{Binding HostAddr}" HorizontalAlignment="Center" TextDecorations="Underline" Foreground="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Margin="-1,0,-1,-4"/>
+				<TextBlock Text="/PTR/WcfService" TextDecorations="Underline" Foreground="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" PreviewMouseDown="AddressTextBlock_PreviewMouseDown" Cursor="Hand"/>
+			</TextBlock>
+		</StackPanel>
+		<Grid Grid.Row="2">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+				<Button x:Name="Remove" Height="21" Width="70" Margin="5" Content="Remove" Command="{Binding comRemove}" Background="#FFF37E7E" BorderBrush="{x:Null}" BorderThickness="0"/>
+				<Button x:Name="Cancel" Height="21" Width="70" Margin="5" Content="Cancel" Click="Cancel_Click" BorderBrush="{x:Null}" BorderThickness="0"/>
+				<Button x:Name="OK" Height="21" Width="70" Margin="5" Content="OK" Command="{Binding comSave}" BorderBrush="{x:Null}" BorderThickness="0"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</Window>

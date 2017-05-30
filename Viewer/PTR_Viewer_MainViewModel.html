@@ -1,0 +1,26 @@
+﻿<h2 id="mainviewmodel">MainViewModel</h2>
+<p>For PTR Viewer Manual go <a href="PTR_Viewer_Manual.md">here</a>.</p>
+<p>A data hub for a <a href="PTR_Viewer_MainWindow.md">MainWindow</a>. It contains all data and code for MainWindow to present. It also is concerned to populate Model classes with necessary <a href="#commands">commands</a> to be used for buttons.</p>
+<h3 id="constructor">Constructor</h3>
+<p>In <a href="App.xaml.cs">App.xaml.cs</a> MainViewModel is constructed with Execution parameter <em>true</em>, it is meant to distinguish a working MainViewModel from a test MainViewModel, which is instantiated by a Designer. So the constructor is devided in 3 parts:</p>
+<ul>
+<li><strong>Working Section</strong> populates some lists with database queries.</li>
+<li><strong>Test Section</strong> populates same lists with test data.</li>
+<li><strong>Common Section</strong> sets a default View (Views are discussed in <a href="PTR_Viewer_MainWindow.md">MainWindow</a>) and other important parameters with current values, be it working data or test data.</li>
+</ul>
+<h3 id="properties">Properties</h3>
+<p>*<strong>ViewVisibility</strong> Properties are mentioned in <a href="PTR_Viewer_MainWindow.md#views">MainWindow</a>.</p>
+<h4 id="commands">Commands</h4>
+<blockquote>
+<p>public ICommand CommandName { get; private set; }</p>
+</blockquote>
+<p>A command property. A button is bound to that. It won't work itself, since it's just an interface.</p>
+<blockquote>
+<p>private void SetupMainViewModelCommands() {<br />
+//SetupMergeViewCommands();<br />
+comToggleReports = new UVMCommand((p) =&gt; {<br />
+ReportsVisibility = (ReportsVisibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;<br />
+});<br />
+...</p>
+</blockquote>
+<p>Here commands get their jobs. <a href="..//SharedLib/PTRModelClasses/UVMCommand.cs">UVMCommand</a> has some nifty things it can do. It has a name, a static CanExecute and a dynamic CanExecute, to suit any need. Moreover it can be a static parameter on a class defined in a different assembly. For examples, go to <a href="..//SharedLib/PTRModelClasses/UVMCommand.cs">UVMCommand.cs</a> file.</p>

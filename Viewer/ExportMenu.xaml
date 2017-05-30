@@ -1,0 +1,82 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:main="clr-namespace:PTR.Viewer"
+        xmlns:shar="clr-namespace:PTR.PTRLib;assembly=PTRLib"
+        xmlns:ccon="clr-namespace:PTR.Viewer.CustomControls"
+        xmlns:EffectLibrary="clr-namespace:EffectLibrary;assembly=EffectLibrary" x:Name="ExportMenuWindow" x:Class="PTR.Viewer.ExportMenu"
+        mc:Ignorable="d" d:DataContext="{DynamicResource TestViewModel}"
+        Title="ExportMenu" Width="300"
+		MouseEnter="ExportMenuWindow_MouseEnter" MouseLeave="ExportMenuWindow_MouseLeave" LostKeyboardFocus="ExportMenuWindow_LostKeyboardFocus"
+		WindowStartupLocation="CenterOwner" ResizeMode="CanResizeWithGrip"
+        BorderBrush="{DynamicResource Pallete.Primary.Darker}"
+        BorderThickness="3" KeyDown="ExportMenuWindow_KeyDown"
+        HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SizeToContent="WidthAndHeight" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <shar:ExportViewModel x:Key="TestViewModel" UserExportType="True" ShowAllowHistoricalData="True" ShowDataExpand="True" DataExpand="True"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=Header}" ResizeBorderThickness="4" CornerRadius="0" GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="10,10" MappingMode="Absolute" SpreadMethod="Repeat">
+                <GradientStop Color="Black" Offset="0.5"/>
+                <GradientStop Color="White" Offset="0.5"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="Header" Text="Export Options" FontSize="22" Background="{DynamicResource Pallete.Primary}" Foreground="{DynamicResource Pallete.Primary.Brighter}" MinHeight="32" TextAlignment="Center"/>
+        <ccon:zButton x:Name="IFunctionExportB" Grid.Row="1" Command="{Binding comExport}" Margin="116,42,116,43" Visibility="{Binding IFunctionExportType, Converter={StaticResource BooleanToVisibilityConverter}}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Width="56" Height="56">
+            <Rectangle Width="32" Height="32" Opacity="0.5" Fill="Black" OpacityMask="{Binding Converter={StaticResource PathToDrawingBrushConverter}, Mode=OneWay, Source={StaticResource z.IFunc}}"/>
+        </ccon:zButton>
+        <ccon:zButton x:Name="ADFolderExportB" Grid.Row="1" Command="{Binding comExport}" Margin="116,42,116,43" Visibility="{Binding ADFolderExportType, Converter={StaticResource BooleanToVisibilityConverter}}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Width="56" Height="56">
+            <Rectangle Fill="Black" Width="32" Height="32" Opacity="0.5" OpacityMask="{Binding Converter={StaticResource PathToDrawingBrushConverter}, Mode=OneWay, Source={StaticResource z.ADFolder}}"/>
+        </ccon:zButton>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10" Visibility="{Binding UserExportType, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" Height="80">
+            <ccon:zButton Command="{Binding comExportISDAVS}" Width="56" Height="56" Margin="10,12" Background="#E50080FE">
+                <Rectangle Fill="Black" Width="32" Height="32" Opacity="0.5" OpacityMask="{Binding Converter={StaticResource PathToDrawingBrushConverter}, Mode=OneWay, Source={StaticResource z.ISDAVSUser}}"/>
+            </ccon:zButton>
+            <ccon:zButton Command="{Binding comExportAD}" Width="56" Height="56" Margin="10" Background="{DynamicResource Pallete.Primary.Brightest}">
+                <Rectangle Fill="Black" Width="32" Height="32" Opacity="0.5" OpacityMask="{Binding Converter={StaticResource PathToDrawingBrushConverter}, Mode=OneWay, Source={StaticResource z.ADUser}}"/>
+            </ccon:zButton>
+        </StackPanel>
+        <Grid Grid.Row="2" Background="{DynamicResource Pallete.Primary.Brightest}" Margin="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Height="26">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding ExportPath}" Margin="5" Height="15"/>
+                <ccon:zButton x:Name="BrowseButton" Content="Browse" Margin="2" Grid.Column="1" d:LayoutOverrides="Width" Grid.Row="1" Click="BrowseButton_Click" Height="18"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Margin="5" VerticalAlignment="Top">
+                <CheckBox Content="Expand" Margin="2" Visibility="{Binding ShowDataExpand, Converter={StaticResource bool2VisibilityConverter}}" IsChecked="{Binding DataExpand}"/>
+                <CheckBox Content="Include historical data" Margin="2" Visibility="{Binding ShowAllowHistoricalData, Converter={StaticResource bool2VisibilityConverter}}" IsChecked="{Binding AllowHistoricalData}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" d:LayoutOverrides="Height" Margin="5" Grid.Row="2">
+                <TextBlock Text="What to do after export" d:LayoutOverrides="LeftPosition, RightPosition"/>
+                <RadioButton Content="nothing" d:LayoutOverrides="LeftPosition, RightPosition" Margin="10,0,0,0" />
+                <RadioButton Content="open export folder" d:LayoutOverrides="LeftPosition, RightPosition" Margin="10,0,0,0" IsChecked="{Binding OpenFolderOnFinish}" />
+                <RadioButton Content="open generated report" d:LayoutOverrides="LeftPosition, RightPosition" Margin="10,0,0,0" IsChecked="{Binding OpenOnFinish}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

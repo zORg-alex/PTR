@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bf28a4c8-d7c7-47ca-8e6e-b32a34d012ba" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/PTR/WcfService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WcfService4.xsd" MetadataType="Schema" ID="cc7b3706-0c9b-4393-a05e-3cf549fd20a0" SourceId="1" SourceUrl="http://localhost/PTR/WcfService?xsd=xsd1" />
+    <MetadataFile FileName="WcfService1.disco" MetadataType="Disco" ID="12ab6026-0484-4c7b-a484-419dee26c216" SourceId="1" SourceUrl="http://localhost/PTR/WcfService?disco" />
+    <MetadataFile FileName="WcfService41.xsd" MetadataType="Schema" ID="d59fc532-83d9-48e7-b75e-acd653a48d63" SourceId="1" SourceUrl="http://localhost/PTR/WcfService?xsd=xsd3" />
+    <MetadataFile FileName="WcfService42.xsd" MetadataType="Schema" ID="d1333104-75c6-4c71-86ce-92bcaaaab35d" SourceId="1" SourceUrl="http://localhost/PTR/WcfService?xsd=xsd0" />
+    <MetadataFile FileName="WcfService43.xsd" MetadataType="Schema" ID="d1046c1d-351f-44e8-8a77-f24e61f4a7c2" SourceId="1" SourceUrl="http://localhost/PTR/WcfService?xsd=xsd2" />
+    <MetadataFile FileName="WcfService1.wsdl" MetadataType="Wsdl" ID="0cf40fd4-f48d-4a32-a185-fed0198efe30" SourceId="1" SourceUrl="http://localhost/PTR/WcfService?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
