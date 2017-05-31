@@ -41,7 +41,7 @@
 				<TextBlock Text="Address:"/>
 				<TextBlock Text="http://" TextDecorations="Underline" Foreground="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" PreviewMouseDown="AddressTextBlock_PreviewMouseDown" Cursor="Hand"/>
 				<TextBox Text="{Binding HostAddr}" HorizontalAlignment="Center" TextDecorations="Underline" Foreground="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Margin="-1,0,-1,-4"/>
-				<TextBlock Text="/PTR/WcfService" TextDecorations="Underline" Foreground="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" PreviewMouseDown="AddressTextBlock_PreviewMouseDown" Cursor="Hand"/>
+				<TextBlock Text=":8697/PTR/WcfService" TextDecorations="Underline" Foreground="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" PreviewMouseDown="AddressTextBlock_PreviewMouseDown" Cursor="Hand"/>
 			</TextBlock>
 		</StackPanel>
 		<Grid Grid.Row="2">

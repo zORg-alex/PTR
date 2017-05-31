@@ -86,7 +86,7 @@ namespace ADTManager {
 				if (Address == "") return;
 				InstanceContext c = new InstanceContext(new WcfServiceCallback(ConsoleWrite));
 
-				WcfService = new WcfServiceClient(c, "WSDualHttpBinding_IWcfService", "http://" + Address + "/PTR/WcfService");
+				WcfService = new WcfServiceClient(c, "WSDualHttpBinding_IWcfService", "http://" + Address + ":8697/PTR/WcfService");
 				//c.SetClient(WcfService);
 				try {
 					WcfService.Open();
