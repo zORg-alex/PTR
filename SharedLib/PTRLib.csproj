@@ -94,6 +94,7 @@
     <Compile Include="GetGroupedPVStructurals_Result.cs">
       <DependentUpon>PTREDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="IDialogHelper.cs" />
     <Compile Include="IFunction.cs">
       <DependentUpon>PTREDM.tt</DependentUpon>
     </Compile>

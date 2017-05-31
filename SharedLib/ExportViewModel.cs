@@ -4,7 +4,7 @@ using System;
 using System.IO;
 
 namespace PTR.PTRLib {
-	public class ExportViewModel : Notifiable {
+	public class ExportViewModel : Notifiable, IDialogHelper {
 
 		//public ExportMenu w;
 		/// <summary>
@@ -78,7 +78,14 @@ namespace PTR.PTRLib {
 				default:
 					break;
 			}
-		}
+
+            comExportBrowse = new UVMCommand((p) => {
+                string FilePath = OpenDialog("SelectFolder", "Select Export Folder", ExportPath);
+                if (FilePath == "") return;
+
+                ExportPath = FilePath;
+            });
+        }
         
 
         private void Save() {
@@ -187,5 +194,20 @@ namespace PTR.PTRLib {
         public bool ADFolderExportType { get { return _adFolderExportType; } set { _adFolderExportType = value; RaisePropertyChanged("ADFolderExportType"); } }
 
         private Action CloseAction;
-	}
+        
+        private UVMCommand _comExportBrowse;
+        public UVMCommand comExportBrowse { get { return _comExportBrowse; } set { _comExportBrowse = value; RaisePropertyChanged("comExportBrowse"); } }
+
+        Func<string, string, string, string> _openDialog = (type, filter, path) => { return ""; };
+        public Func<string, string, string, string> OpenDialog {
+            get {
+                return _openDialog;
+            }
+
+            set {
+                _openDialog = value;
+            }
+        }
+
+    }
 }

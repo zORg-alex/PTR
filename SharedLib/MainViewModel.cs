@@ -209,6 +209,7 @@ namespace PTR.PTRLib {
 		public ICommand comToggleUser { get; private set; }
         public ICommand comExport { get; private set; }
         public ICommand comExportClose { get; private set; }
+        public ICommand comExportBrowse { get; private set; }
 
         /// <summary>
         /// Sets up all commands in one place. Should put all Command initializations here.
@@ -637,7 +638,7 @@ namespace PTR.PTRLib {
 		private Visibility _reportsVisibility;
 		public Visibility ReportsVisibility { get { return _reportsVisibility; } set { _reportsVisibility = value; RaisePropertyChanged("ReportsVisibility"); } }
 
-		public void ReportClicked(ImportReport Report) {
+        public void ReportClicked(ImportReport Report) {
 			if (Report == null) return;
 			if (Report.Table == "ISDAVSUsers") {
 				CurrentView = Views.UserView;

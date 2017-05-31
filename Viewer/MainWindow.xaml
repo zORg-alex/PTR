@@ -18,7 +18,8 @@
     d:DesignWidth="841" d:DesignHeight="416" Style="{DynamicResource EmptyModernWindowStyle}">
     <mui:ModernWindow.Resources>
         <ResourceDictionary>
-            <shar:MainViewModel x:Key="TestViewModel" CurrentView="FunctionView" IsExportVisible="False" IsMenuVisible="False" MergeUUserFilter="a"/>
+            <c:DialogHelper x:Key="DialogHelperObject"/>
+            <shar:MainViewModel x:Key="TestViewModel" CurrentView="FunctionView" IsExportVisible="True" IsMenuVisible="False" MergeUUserFilter="a"/>
             <shar:BoolNegationConverter x:Key="BoolNegationConverter"/>
         </ResourceDictionary>
     </mui:ModernWindow.Resources>
@@ -264,7 +265,7 @@
                                             <ColumnDefinition Width="50"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding ExportPath}" Margin="5" Height="15"/>
-                                        <!--<c:zButton x:Name="BrowseButton" Content="Browse" Margin="2" Grid.Column="1" d:LayoutOverrides="Width" Grid.Row="1" Click="BrowseButton_Click" Height="18"/>-->
+                                        <c:zButton x:Name="BrowseButton" Command="{Binding comExportBrowse}" Content="Browse" Margin="2" Grid.Column="1" d:LayoutOverrides="Width" Grid.Row="1" Height="18"/>
                                     </Grid>
                                     <StackPanel Grid.Row="1" Margin="5" VerticalAlignment="Top">
                                         <CheckBox Content="Expand" Margin="2" Visibility="{Binding ShowDataExpand, Converter={StaticResource bool2VisibilityConverter}}" IsChecked="{Binding DataExpand}"/>

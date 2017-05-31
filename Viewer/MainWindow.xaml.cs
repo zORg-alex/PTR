@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Runtime.InteropServices;
 using WinInterop = System.Windows.Interop;
 using System;
+using PTR.Viewer.CustomControls;
 
 namespace PTR.Viewer {
 	/// <summary>
@@ -23,6 +24,10 @@ namespace PTR.Viewer {
 
 		public MainWindow() {
 			InitializeComponent();
+
+            ExportControl.DataContextChanged += (dp, e) => {
+                (ExportControl.DataContext as IDialogHelper).OpenDialog = DialogHelper.OpenDialog;
+            };
 
             //this.Loaded += new RoutedEventHandler(win_Loaded);
             this.SourceInitialized += new EventHandler(win_SourceInitialized);
