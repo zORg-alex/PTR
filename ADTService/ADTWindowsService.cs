@@ -27,7 +27,7 @@ namespace ADTService {
 		}
 		
 		public static void Main() {
-			bool Debug = true;
+			bool Debug = false;
             if (Debug) {
                 bool exit = false;
                 var adt = new ADTWindowsService();
