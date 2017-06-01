@@ -5,8 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.ServiceModel;
-using System.ServiceModel.Description;
+//using System.ServiceModel;
+//using System.ServiceModel.Description;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -14,11 +14,11 @@ using System.Threading.Tasks;
 using System.Timers;
 
 namespace ADTService {
-	public partial class ADTWindowsService : ServiceBase {
+    public partial class ADTWindowsService : ServiceBase {
 
-		public static ServiceHost ServiceWCFHost;
-		private System.Timers.Timer timer;
-		private Thread ADTThread = new Thread((p) => ADT.Main(null)) { Name = "ADT Service Thread" };
+        //public static ServiceHost ServiceWCFHost;
+        //private System.Timers.Timer timer;
+        private Thread ADTThread = new Thread((p) => ADT.Main()) { Name = "ADT Service Thread" };
 
 		public ADTWindowsService() {
 			InitializeComponent();
@@ -27,7 +27,7 @@ namespace ADTService {
 		}
 		
 		public static void Main() {
-			bool Debug = false;
+			bool Debug = true;
             if (Debug) {
                 bool exit = false;
                 var adt = new ADTWindowsService();
@@ -35,7 +35,6 @@ namespace ADTService {
                 while (!exit) {
                     //exit = true;
                     Thread.Sleep(1000);
-                    //if (ServiceWCFHost.State == CommunicationState.Faulted || ServiceWCFHost.State == CommunicationState.Closed) exit = true;
                 }
                 adt.OnStop();
             } else {
@@ -52,17 +51,16 @@ namespace ADTService {
 			SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 			#endregion
 
-			if (ServiceWCFHost != null) {
-				ServiceWCFHost.Close();
-			}
-			// Create a WCF service host to receive a connection to a WindowsService client
-			//Uri baseAddress = new Uri("http://localhost/PTR/WcfService");
-			ServiceWCFHost = new ServiceHost(typeof(ADTService.WcfCommunication.WcfService));
-			try {
-				ServiceWCFHost.Open();
-			} catch (Exception e) {
-				ServiceWCFHost.Abort();
-			}
+			//if (ServiceWCFHost != null) {
+			//	ServiceWCFHost.Close();
+			//}
+			//// Create a WCF service host to receive a connection to a WindowsService client
+			//ServiceWCFHost = new ServiceHost(typeof(ADTService.WcfCommunication.WcfService));
+			//try {
+			//	ServiceWCFHost.Open();
+			//} catch (Exception e) {
+			//	ServiceWCFHost.Abort();
+			//}
 			//Service code Here
 			ADTThread.Start();
 

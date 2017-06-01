@@ -52,7 +52,6 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,8 +80,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsReader.cs" />
-    <Compile Include="WcfCommunication\IWcfService.cs" />
-    <Compile Include="WcfCommunication\WcfService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -90,11 +87,11 @@
     <None Include="ServiceInstall.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="zInstall.bat" />
+    <None Include="ProjectInstallService.bat" />
     <None Include="ServiceUninstall.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="zUninstall.bat" />
+    <None Include="ProjectUninstallService.bat" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">

@@ -10,6 +10,7 @@ namespace ADTService {
         static protected int Delay { get { return ADT.Delay; } set { ADT.Delay = value; } }
         static protected bool skipADUserScanning { get { return ADT.skipADUserScanning; } set { ADT.skipADUserScanning = value; } }
         static protected bool skipFolderParsing { get { return ADT.skipFolderParsing; } set { ADT.skipFolderParsing = value; } }
+        static protected string LogPath { get { return ADT.LogPath; } set { ADT.LogPath = value; } }
         static protected FileSystemWatcher watcher;
 
 		public SettingsReader() {
@@ -52,6 +53,7 @@ namespace ADTService {
                                 if (reader.Name.ToLower() == "delay") Delay = int.Parse(reader.Value);
                                 if (reader.Name.ToLower() == "skipaduserscanning") skipADUserScanning = bool.Parse(reader.Value);
                                 if (reader.Name.ToLower() == "skipfolderparsing") skipFolderParsing = bool.Parse(reader.Value);
+                                if (reader.Name.ToLower() == "logpath") LogPath = reader.Value;
                                 //if (Delay < 50) Delay = 50;
                             }
 						}

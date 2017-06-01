@@ -13,6 +13,7 @@ namespace ADTService {
 		static internal int Delay = 1000;
         static internal bool skipADUserScanning = false;
         static internal bool skipFolderParsing = false;
+        static internal string LogPath = "";
         static internal bool ex = false;
         static internal bool exit { get { return ex; } set { ex = value; } }
         static internal List<ADTScanner> ScannerThreads = new List<ADTScanner>();
@@ -23,7 +24,7 @@ namespace ADTService {
 		static internal SettingsReader SettingsReader = new SettingsReader();
 		static internal bool SettingsChanged = false;
 
-		static public void Main(string[] args) {
+		static public void Main() {
             ////For debug time only
             //bool exit = false;
             //while (!exit) {
@@ -31,12 +32,13 @@ namespace ADTService {
             //	Thread.Sleep(5000);
             //}
 
+            SettingsReader.Read();
+
             if (!skipADUserScanning) {
                 ADTUserScanner UserScanner = new ADTUserScanner();
                 UserScannerThread = new Thread(() => { UserScanner.Main(); });
                 UserScannerThread.Name = "ADUserScannerThread";
                 UserScannerThread.Start();
-                //UsersReady = true; //For Debug only
             }
 
             ADTSyncTask SyncTask = new ADTSyncTask();

@@ -355,7 +355,7 @@ namespace ADTService {
                 ADTConsole.Write(Name, "ADFolder {0}: ", PathDB);
                 return r;
             } catch (Exception e) {
-                PrintException(e.InnerException, 0);
+                PrintException(e, 0);
             }
             return null;
 		}
