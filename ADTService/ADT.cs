@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace ADTService {
 	class ADT {
 		static internal PTRContext db = new PTRContext();
+        static internal DateTime StartTime = DateTime.Now;
 		static internal bool UsersReady = false;
 		static internal int Delay = 1000;
         static internal bool skipADUserScanning = false;

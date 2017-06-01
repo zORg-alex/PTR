@@ -53,7 +53,13 @@ namespace ADTService {
                                 if (reader.Name.ToLower() == "delay") Delay = int.Parse(reader.Value);
                                 if (reader.Name.ToLower() == "skipaduserscanning") skipADUserScanning = bool.Parse(reader.Value);
                                 if (reader.Name.ToLower() == "skipfolderparsing") skipFolderParsing = bool.Parse(reader.Value);
-                                if (reader.Name.ToLower() == "logpath") LogPath = reader.Value;
+                                if (reader.Name.ToLower() == "logpath") {
+                                    LogPath = reader.Value;
+                                    if (LogPath.Substring(LogPath.Length - 1, 1) != "\\") {
+                                        LogPath += "\\";
+                                    }
+                                    LogPath += ADT.StartTime.ToString("yyyy.MM.dd HH.mm.ss.tt") + "\\";
+                                }
                                 //if (Delay < 50) Delay = 50;
                             }
 						}
