@@ -3,12 +3,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 //using System.ServiceModel;
+using System;
+using System.Diagnostics;
 
 namespace ADTService {
 	public class ADTConsole {
 
+		static string sSource;
+		static string sLog;
+		static string sEvent;
+
+		static ADTConsole() {
+			sSource = "ADTService";
+			sLog = "Application";
+			sEvent = "Sample Event";
+			if (!EventLog.SourceExists(sSource))
+				EventLog.CreateEventSource(sSource, sLog);
+		}
+
 		//static IServiceCallback callback;
-		static bool ok = false;
+		//static bool ok = false;
 
         static protected string LogPath { get { return ADT.LogPath; } set { ADT.LogPath = value; } }
 
@@ -34,26 +48,8 @@ namespace ADTService {
             //		//callback = null;
             //	}
             //}
-            var t = new Thread((p)=> { 
-                if (!Directory.Exists(LogPath)) {
-                    Directory.CreateDirectory(LogPath);
-                }
-                System.IO.StreamWriter file = null;
-                bool ok = false;
-                while (!ok) {
-                    try {
-                        file = new System.IO.StreamWriter(LogPath + ConsoleName + "_log.txt", true);
-                    } catch (IOException) {
-
-                    } finally {
-                        if (file != null) {
-                            file.Write(text);
-                            file.Close();
-                            ok = true;
-                        }
-                    }
-                    Thread.Sleep(5);
-                }
+            var t = new Thread((p) => {
+                WriteToLog(LogPath + ConsoleName, text);
             }) { Name = "ADTConsole " + ConsoleName + " Log Writer" };
             t.Start();
         }
@@ -61,6 +57,29 @@ namespace ADTService {
 			Write(ConsoleName, String + System.Environment.NewLine, arg);
 
 		}
+
+        static void WriteToLog(string LogName, string Message) {
+            if (!Directory.Exists(LogPath)) {
+                EventLog.WriteEntry(sSource, "Created " + LogPath + " folder for logs");
+                Directory.CreateDirectory(LogPath);
+            }
+            System.IO.StreamWriter file = null;
+            bool done = false;
+            while (!done) {
+                try {
+                    file = new System.IO.StreamWriter(LogName + "_log.txt", true);
+                } catch (IOException e) {
+                    //EventLog.WriteEntry(sSource, e.Message, EventLogEntryType.Error);
+                } finally {
+                    if (file != null) {
+                        file.Write(Message);
+                        file.Close();
+                        done = true;
+                    }
+                }
+                Thread.Sleep(5);
+            }
+        }
 
         //public static void SetCallback() {
         //    try {
