@@ -36,9 +36,9 @@ namespace PTR.Viewer {
 			w.Show();
 		}
 
-		protected override void OnExit(ExitEventArgs e) {
-			mvm.SaveToDB();
-			base.OnExit(e);
-		}
-	}
+        protected override void OnExit(ExitEventArgs e) {
+            mvm.SaveToDB();
+            base.OnExit(e);
+        }
+    }
 }

@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<config delay="101" SkipadUserScanning="false" SkipFolderParsing="false" LogPath="C:\Users\AUljanovs\Desktop\ADTConsole\">
+<config delay="500" SkipAdUserScanning="true" SkipFolderParsing="false" LogPath="C:\ADTService_logs\">
 	<!-- both paths should end with '\' -->
-	<!--<dir path="G:\" pathDB="G:\"/>-->
-	<!--<dir path="X:\" pathDB="X:\"/>-->
-	<dir path="C:\Users\AUljanovs\Desktop\New folder\" pathDB="Y:\"/>
+	<!-- <dir path="C:\Users\AUljanovs\Desktop\New folder\" pathDB="Y:\"/> -->
 </config>

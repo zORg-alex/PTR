@@ -232,6 +232,7 @@
       <DependentUpon>PTREDM.edmx</DependentUpon>
       <LastGenOutput>PTREDM.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="PTREDM.edmx.sql" />
     <Content Include="PTREDM.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PTREDM.edmx</DependentUpon>

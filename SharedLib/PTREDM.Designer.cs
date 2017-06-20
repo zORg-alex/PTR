@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\AUljanovs\Documents\Visual Studio 2015\Projects\PTR\SharedLib\PTREDM.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\AUljanovs\Documents\GitHub\PTR\SharedLib\PTREDM.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

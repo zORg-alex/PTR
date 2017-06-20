@@ -15,9 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PTR.Viewer.CustomControls {
-    /// <summary>
-    /// Interaction logic for MenuButton.xaml
-    /// </summary>
     public partial class MenuButton : zButton {
         public MenuButton() {
             Click += (sender, e) => {

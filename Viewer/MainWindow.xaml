@@ -19,7 +19,7 @@
     <mui:ModernWindow.Resources>
         <ResourceDictionary>
             <c:DialogHelper x:Key="DialogHelperObject"/>
-            <shar:MainViewModel x:Key="TestViewModel" CurrentView="FunctionView" IsExportVisible="True" IsMenuVisible="False" MergeUUserFilter="a"/>
+            <shar:MainViewModel x:Key="TestViewModel" CurrentView="FolderView" IsExportVisible="False" IsMenuVisible="False" UUserFilter="a"/>
             <shar:BoolNegationConverter x:Key="BoolNegationConverter"/>
         </ResourceDictionary>
     </mui:ModernWindow.Resources>

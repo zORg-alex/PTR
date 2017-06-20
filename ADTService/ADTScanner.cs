@@ -60,8 +60,9 @@ namespace ADTService {
 			//Setup watchers
 			FileSystemWatcher watcher = new FileSystemWatcher() {
 				Path = rootPath,
-				NotifyFilter = NotifyFilters.Security | NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.Attributes,
-				Filter = "*.*",
+                NotifyFilter = NotifyFilters.Security | NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.Attributes,
+                //NotifyFilter = NotifyFilters.DirectoryName,
+                Filter = "",
 				IncludeSubdirectories = true
 			};
 			watcher.EnableRaisingEvents = true;
@@ -128,25 +129,41 @@ namespace ADTService {
 		}
 
 		void FolderChanged(object source, FileSystemEventArgs e) {
-			while (WatcherResponsesLock) {
+            if (!CheckIfFolder(e.FullPath)) return;
+            while (WatcherResponsesLock) {
 				Thread.Sleep(5);
 			}
 			WatcherResponses.Add(new WatcherResponse(WatcherResponse.ResponseType.Changed, e.Name, e.FullPath));
 		}
 
-		private void FolderRenamed(object sender, RenamedEventArgs e) {
-			while (WatcherResponsesLock) {
+        private void FolderRenamed(object sender, RenamedEventArgs e) {
+            if (!CheckIfFolder(e.FullPath)) return;
+            while (WatcherResponsesLock) {
 				Thread.Sleep(5);
 			}
 			WatcherResponses.Add(new WatcherResponse(WatcherResponse.ResponseType.Renamed, e.Name, e.FullPath) { OldName = e.OldName, OldFullPath = e.OldFullPath });
 		}
 
 		private void FolderDeleted(object sender, FileSystemEventArgs e) {
-			while (WatcherResponsesLock) {
+            if (!CheckIfFolder(e.FullPath)) return;
+            while (WatcherResponsesLock) {
 				Thread.Sleep(5);
 			}
 			WatcherResponses.Add(new WatcherResponse(WatcherResponse.ResponseType.Deleted, e.Name, e.FullPath));
 		}
+
+        //private bool CaseBlacklist(string name) {
+        //    if (name.Length < 4) return false;
+        //    string ext;// = name.Substring(name.Length - 4).ToLower();
+        //    ext = name.Substring(name.LastIndexOf('.'));
+        //    return (ext == ".mdb" || ext == ".zip" || ext == ".tmp" || ext == ".xlsx" || ext == ".accdb" || ext == ".docx") ? true : false; //TODO Expand list
+        //}
+
+        private bool CheckIfFolder(string path) {
+            FileAttributes a = File.GetAttributes(path);
+            if ((a & FileAttributes.Directory) == FileAttributes.Directory) return true;
+            return false;
+        }
 
 		//Here are things we should do in Worker Thread, but it will be executed from main thread instead
 		private void CheckWatcherResponses() {
@@ -159,8 +176,8 @@ namespace ADTService {
 							//string parentPathDB = pathDB.Substring(0, pathDB.LastIndexOf('\\'));
 
 							//var parent = GetOrCreateADFolder(parentPathDB, null, "");
-							ProcessFolder(r.FullPath, null, true);
 							ADTConsole.WriteLine(Name, "Folder \"{0}\" Changed ", pathDB);
+							ProcessFolder(r.FullPath, null, true);
 							//db.SaveChanges();
 						} catch (Exception ex) {
 							ADTConsole.WriteLine(Name, "Watcher FolderChanged: {0} ", ex.Message);
@@ -188,8 +205,8 @@ namespace ADTService {
 							var adf = db.ADFolders.FirstOrDefault(f => f.FullPath == _oldPathDB);
 							//adf.FullPath = _pathDB;
 							//adf.Name = r.Name;
-							UpdateADFolderPath(adf, _pathDB, r.Name);
 							ADTConsole.WriteLine(Name, "Folder \"{0}\" Renamed to \"{1}\" ", _oldPathDB, _pathDB);
+							UpdateADFolderPath(adf, _pathDB, r.Name);
 							//db.SaveChanges();
 						} catch (Exception ex) {
 							ADTConsole.WriteLine(Name, "Watcher FolderRenamed: {0} ", ex.Message);
@@ -213,7 +230,7 @@ namespace ADTService {
 			try {
 				subDirs = Directory.GetDirectories(Path);
 			} catch (Exception ex) {
-				ADTConsole.WriteLine(Name, "/nProcessing folder, getting subdirectories: {0} ", ex.Message);
+				ADTConsole.WriteLine(Name, "\nProcessing folder, getting subdirectories: {0} ", ex.Message);
 			}
 			var subDirNames = "";//May be unnecessary, could create a simple subdir name concatenating function
 			foreach (var s in subDirs) {
@@ -335,7 +352,7 @@ namespace ADTService {
                     db.ADFolders.Add(r);
                     //await db.SaveChangesAsync();
                     //ADFolderList.Add(r);
-                    ADTConsole.WriteLine(Name, "Created ");
+                    ADTConsole.WriteLine(Name, "+Created ");
                 } else {
                     //In case it was a dummy, regenerate ADFolder
                     if (r.Status == false) {
@@ -398,7 +415,7 @@ namespace ADTService {
 					Status = Status
 				};
 				db.ADUsers.Add(r);
-				ADTConsole.Write(Name, "!Created ADUser {0}: ", r.Login);
+				ADTConsole.Write(Name, "+ADUser {0}: ", r.Login);
 			}
 			return r;
 		}
@@ -419,7 +436,7 @@ namespace ADTService {
 					Surname = ""
 				};
 				db.UUsers.Add(r);
-				ADTConsole.Write(Name, "!Created UUser {0}: ", r.FullName);
+				ADTConsole.Write(Name, "+UUser {0}: ", r.FullName);
 			} else {
 				if (r.Email != Mail) {
 					r.Email = Mail;

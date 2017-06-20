@@ -4,620 +4,615 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PTRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ADDrives">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Path" Type="nvarchar(max)" />
-          <Property Name="Name" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="ADFolderAccesses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="FolderID" Type="int" Nullable="false" />
-          <Property Name="FileSystemRights_" Type="int" />
-          <Property Name="From" Type="datetime" />
-          <Property Name="To" Type="datetime" />
-          <Property Name="ParentFolderAccessId" Type="int" />
-        </EntityType>
-        <EntityType Name="ADFolders">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ParentFolderId" Type="int" />
-          <Property Name="DriveId" Type="int" Nullable="false" />
-          <Property Name="FullPath" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SubHash" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IsRootFolder" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ADUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="DN" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UUserId" Type="int" />
-        </EntityType>
-        <EntityType Name="IFunction_import">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Type" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Type" Type="bit" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="IFunctionAccess_import">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="FunctionId" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="FunctionId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="IFunctionAccesses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="FunctionId" Type="int" Nullable="false" />
-          <Property Name="From" Type="datetime" />
-          <Property Name="To" Type="datetime" />
-        </EntityType>
-        <EntityType Name="IFunctions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Type" Type="bit" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="Description" Type="nchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="ImportReports">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NewRecord" Type="int" Nullable="false" />
-          <Property Name="Table" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="RecordId" Type="int" Nullable="false" />
-          <Property Name="Hide" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="IQuest_import">
-          <Key>
-            <PropertyRef Name="quest_id" />
-          </Key>
-          <Property Name="quest_id" Type="int" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="80" Nullable="false" />
-          <Property Name="name_eng" Type="varchar" MaxLength="80" />
-          <Property Name="q_index" Type="varchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <EntityType Name="IQuestAccess_import">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="FunctionAccessId" />
-            <PropertyRef Name="QuestId" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="FunctionAccessId" Type="int" Nullable="false" />
-          <Property Name="QuestId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="IQuestAccesses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="FunctionAccessId" Type="int" Nullable="false" />
-          <Property Name="QuestId" Type="int" Nullable="false" />
-          <Property Name="From" Type="datetime" />
-          <Property Name="To" Type="datetime" />
-        </EntityType>
-        <EntityType Name="IQuests">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar(max)" />
-          <Property Name="Index" Type="varchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ISDAVSUser_import">
-          <Key>
-            <PropertyRef Name="user_id" />
-            <PropertyRef Name="user_login_name" />
-            <PropertyRef Name="user_name" />
-          </Key>
-          <Property Name="user_id" Type="int" Nullable="false" />
-          <Property Name="user_login_name" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="user_surname" Type="varchar" MaxLength="50" />
-          <Property Name="user_phone" Type="varchar" MaxLength="20" />
-          <Property Name="user_email" Type="varchar" MaxLength="300" />
-          <Property Name="user_horizon_id" Type="int" />
-          <Property Name="user_name" Type="varchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ISDAVSUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Login" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="Surname" Type="nchar" MaxLength="50" />
-          <Property Name="Phone" Type="nchar" MaxLength="20" />
-          <Property Name="Email" Type="nchar" MaxLength="300" />
-          <Property Name="UUserId" Type="int" />
-          <Property Name="NormalizedFullName" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="PVEmploee_import">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Surname" Type="varchar" MaxLength="50" />
-          <Property Name="ProfessionId" Type="int" />
-          <Property Name="PartId" Type="nchar" MaxLength="50" />
-          <Property Name="DepartmentId" Type="nchar" MaxLength="50" />
-          <Property Name="Status" Type="int" />
-        </EntityType>
-        <EntityType Name="PVEmploees">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="NormalizedFullName" Type="nvarchar(max)" />
-          <Property Name="From" Type="datetime" />
-          <Property Name="To" Type="datetime" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="Phone" Type="nvarchar(max)" />
-          <Property Name="LocalPhone" Type="nvarchar(max)" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="DepartmentId" Type="varchar" MaxLength="50" />
-          <Property Name="PartId" Type="varchar" MaxLength="50" />
-          <Property Name="ProfessionId" Type="int" />
-          <Property Name="UUserId" Type="int" />
-        </EntityType>
-        <EntityType Name="PVHistEmploees">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="From" Type="datetime" />
-          <Property Name="To" Type="datetime" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="Phone" Type="nvarchar(max)" />
-          <Property Name="LocalPhone" Type="nvarchar(max)" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="DepartmentId" Type="varchar" MaxLength="50" />
-          <Property Name="PartId" Type="varchar" MaxLength="50" />
-          <Property Name="ProfessionId" Type="int" />
-          <Property Name="ChangeDate" Type="datetime" Nullable="false" />
-          <Property Name="EmploeeID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PVProfessions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PVStructural_import">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Id" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Level" Type="varchar" MaxLength="50" />
-          <Property Name="HeadDeptCode" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="PVStructurals">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Level" Type="varchar" MaxLength="50" />
-          <Property Name="HeadDepartmentId" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="UUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="hide" Type="bit" Nullable="false" />
-          <Property Name="NormalizedFullName" Type="nvarchar(max)" />
-        </EntityType>
-        <Association Name="FK_ADDriveADFolder">
-          <End Role="ADDrives" Type="Self.ADDrives" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ADFolders" Type="Self.ADFolders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ADDrives">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ADFolders">
-              <PropertyRef Name="DriveId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ADFolderAccessADFolderAccess">
-          <End Role="ADFolderAccesses" Type="Self.ADFolderAccesses" Multiplicity="0..1" />
-          <End Role="ADFolderAccesses1" Type="Self.ADFolderAccesses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ADFolderAccesses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ADFolderAccesses1">
-              <PropertyRef Name="ParentFolderAccessId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ADFolderADFolderAccess">
-          <End Role="ADFolders" Type="Self.ADFolders" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ADFolderAccesses" Type="Self.ADFolderAccesses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ADFolders">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ADFolderAccesses">
-              <PropertyRef Name="FolderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ADParentFolderADFolder">
-          <End Role="ADFolders" Type="Self.ADFolders" Multiplicity="0..1" />
-          <End Role="ADFolders1" Type="Self.ADFolders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ADFolders">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ADFolders1">
-              <PropertyRef Name="ParentFolderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ADUserADFolderAccess">
-          <End Role="ADUsers" Type="Self.ADUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ADFolderAccesses" Type="Self.ADFolderAccesses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ADUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ADFolderAccesses">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DepartmentPVHistEmploee">
-          <End Role="PVStructurals" Type="Self.PVStructurals" Multiplicity="0..1" />
-          <End Role="PVHistEmploees" Type="Self.PVHistEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVStructurals">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVHistEmploees">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FunctionAccessFunction">
-          <End Role="IFunctions" Type="Self.IFunctions" Multiplicity="1" />
-          <End Role="IFunctionAccesses" Type="Self.IFunctionAccesses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IFunctions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IFunctionAccesses">
-              <PropertyRef Name="FunctionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FunctionAccessQuestAccess">
-          <End Role="IFunctionAccesses" Type="Self.IFunctionAccesses" Multiplicity="1" />
-          <End Role="IQuestAccesses" Type="Self.IQuestAccesses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IFunctionAccesses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IQuestAccesses">
-              <PropertyRef Name="FunctionAccessId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ISDAVS_UserFunctionAccess">
-          <End Role="ISDAVSUsers" Type="Self.ISDAVSUsers" Multiplicity="1" />
-          <End Role="IFunctionAccesses" Type="Self.IFunctionAccesses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ISDAVSUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IFunctionAccesses">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PartPVHistEmploee">
-          <End Role="PVStructurals" Type="Self.PVStructurals" Multiplicity="0..1" />
-          <End Role="PVHistEmploees" Type="Self.PVHistEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVStructurals">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVHistEmploees">
-              <PropertyRef Name="PartId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PV_EmploeePV_HistEmploee">
-          <End Role="PVEmploees" Type="Self.PVEmploees" Multiplicity="1" />
-          <End Role="PVHistEmploees" Type="Self.PVHistEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVEmploees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVHistEmploees">
-              <PropertyRef Name="EmploeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PV_ProfessionPV_Emploee">
-          <End Role="PVProfessions" Type="Self.PVProfessions" Multiplicity="0..1" />
-          <End Role="PVEmploees" Type="Self.PVEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVProfessions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVEmploees">
-              <PropertyRef Name="ProfessionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PV_ProfessionPV_HistEmploee">
-          <End Role="PVProfessions" Type="Self.PVProfessions" Multiplicity="0..1" />
-          <End Role="PVHistEmploees" Type="Self.PVHistEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVProfessions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVHistEmploees">
-              <PropertyRef Name="ProfessionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PVEmploeeDepartment">
-          <End Role="PVStructurals" Type="Self.PVStructurals" Multiplicity="0..1" />
-          <End Role="PVEmploees" Type="Self.PVEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVStructurals">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVEmploees">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PVEmploeePart">
-          <End Role="PVStructurals" Type="Self.PVStructurals" Multiplicity="0..1" />
-          <End Role="PVEmploees" Type="Self.PVEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVStructurals">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVEmploees">
-              <PropertyRef Name="PartId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PVStructuralPVStructural">
-          <End Role="PVStructurals" Type="Self.PVStructurals" Multiplicity="0..1" />
-          <End Role="PVStructurals1" Type="Self.PVStructurals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVStructurals">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVStructurals1">
-              <PropertyRef Name="HeadDepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_QuestAccessQuest">
-          <End Role="IQuests" Type="Self.IQuests" Multiplicity="1" />
-          <End Role="IQuestAccesses" Type="Self.IQuestAccesses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IQuests">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IQuestAccesses">
-              <PropertyRef Name="QuestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UUserADUser">
-          <End Role="UUsers" Type="Self.UUsers" Multiplicity="0..1" />
-          <End Role="ADUsers" Type="Self.ADUsers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ADUsers">
-              <PropertyRef Name="UUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UUserISDAVSUser">
-          <End Role="UUsers" Type="Self.UUsers" Multiplicity="0..1" />
-          <End Role="ISDAVSUsers" Type="Self.ISDAVSUsers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ISDAVSUsers">
-              <PropertyRef Name="UUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UUserPVEmploee">
-          <End Role="UUsers" Type="Self.UUsers" Multiplicity="0..1" />
-          <End Role="PVEmploees" Type="Self.PVEmploees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PVEmploees">
-              <PropertyRef Name="UUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="GetGroupedPVStructurals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="LatinToASCII" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar(max)">
-          <Parameter Name="String" Type="varchar(max)" Mode="In" />
-        </Function>
-        <Function Name="UpdateAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="PTRModelStoreContainer">
-          <EntitySet Name="ADDrives" EntityType="Self.ADDrives" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ADFolderAccesses" EntityType="Self.ADFolderAccesses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ADFolders" EntityType="Self.ADFolders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ADUsers" EntityType="Self.ADUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IFunction_import" EntityType="Self.IFunction_import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IFunctionAccess_import" EntityType="Self.IFunctionAccess_import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IFunctionAccesses" EntityType="Self.IFunctionAccesses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IFunctions" EntityType="Self.IFunctions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ImportReports" EntityType="Self.ImportReports" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IQuest_import" EntityType="Self.IQuest_import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IQuestAccess_import" EntityType="Self.IQuestAccess_import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IQuestAccesses" EntityType="Self.IQuestAccesses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IQuests" EntityType="Self.IQuests" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ISDAVSUser_import" EntityType="Self.ISDAVSUser_import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ISDAVSUsers" EntityType="Self.ISDAVSUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PVEmploee_import" EntityType="Self.PVEmploee_import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PVEmploees" EntityType="Self.PVEmploees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PVHistEmploees" EntityType="Self.PVHistEmploees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PVProfessions" EntityType="Self.PVProfessions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PVStructural_import" EntityType="Self.PVStructural_import" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PVStructurals" EntityType="Self.PVStructurals" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UUsers" EntityType="Self.UUsers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ADDriveADFolder" Association="Self.FK_ADDriveADFolder">
-            <End Role="ADDrives" EntitySet="ADDrives" />
-            <End Role="ADFolders" EntitySet="ADFolders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ADFolderAccessADFolderAccess" Association="Self.FK_ADFolderAccessADFolderAccess">
-            <End Role="ADFolderAccesses" EntitySet="ADFolderAccesses" />
-            <End Role="ADFolderAccesses1" EntitySet="ADFolderAccesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ADFolderADFolderAccess" Association="Self.FK_ADFolderADFolderAccess">
-            <End Role="ADFolders" EntitySet="ADFolders" />
-            <End Role="ADFolderAccesses" EntitySet="ADFolderAccesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ADParentFolderADFolder" Association="Self.FK_ADParentFolderADFolder">
-            <End Role="ADFolders" EntitySet="ADFolders" />
-            <End Role="ADFolders1" EntitySet="ADFolders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ADUserADFolderAccess" Association="Self.FK_ADUserADFolderAccess">
-            <End Role="ADUsers" EntitySet="ADUsers" />
-            <End Role="ADFolderAccesses" EntitySet="ADFolderAccesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DepartmentPVHistEmploee" Association="Self.FK_DepartmentPVHistEmploee">
-            <End Role="PVStructurals" EntitySet="PVStructurals" />
-            <End Role="PVHistEmploees" EntitySet="PVHistEmploees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FunctionAccessFunction" Association="Self.FK_FunctionAccessFunction">
-            <End Role="IFunctions" EntitySet="IFunctions" />
-            <End Role="IFunctionAccesses" EntitySet="IFunctionAccesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FunctionAccessQuestAccess" Association="Self.FK_FunctionAccessQuestAccess">
-            <End Role="IFunctionAccesses" EntitySet="IFunctionAccesses" />
-            <End Role="IQuestAccesses" EntitySet="IQuestAccesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ISDAVS_UserFunctionAccess" Association="Self.FK_ISDAVS_UserFunctionAccess">
-            <End Role="ISDAVSUsers" EntitySet="ISDAVSUsers" />
-            <End Role="IFunctionAccesses" EntitySet="IFunctionAccesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PartPVHistEmploee" Association="Self.FK_PartPVHistEmploee">
-            <End Role="PVStructurals" EntitySet="PVStructurals" />
-            <End Role="PVHistEmploees" EntitySet="PVHistEmploees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PV_EmploeePV_HistEmploee" Association="Self.FK_PV_EmploeePV_HistEmploee">
-            <End Role="PVEmploees" EntitySet="PVEmploees" />
-            <End Role="PVHistEmploees" EntitySet="PVHistEmploees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PV_ProfessionPV_Emploee" Association="Self.FK_PV_ProfessionPV_Emploee">
-            <End Role="PVProfessions" EntitySet="PVProfessions" />
-            <End Role="PVEmploees" EntitySet="PVEmploees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PV_ProfessionPV_HistEmploee" Association="Self.FK_PV_ProfessionPV_HistEmploee">
-            <End Role="PVProfessions" EntitySet="PVProfessions" />
-            <End Role="PVHistEmploees" EntitySet="PVHistEmploees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PVEmploeeDepartment" Association="Self.FK_PVEmploeeDepartment">
-            <End Role="PVStructurals" EntitySet="PVStructurals" />
-            <End Role="PVEmploees" EntitySet="PVEmploees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PVEmploeePart" Association="Self.FK_PVEmploeePart">
-            <End Role="PVStructurals" EntitySet="PVStructurals" />
-            <End Role="PVEmploees" EntitySet="PVEmploees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PVStructuralPVStructural" Association="Self.FK_PVStructuralPVStructural">
-            <End Role="PVStructurals" EntitySet="PVStructurals" />
-            <End Role="PVStructurals1" EntitySet="PVStructurals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestAccessQuest" Association="Self.FK_QuestAccessQuest">
-            <End Role="IQuests" EntitySet="IQuests" />
-            <End Role="IQuestAccesses" EntitySet="IQuestAccesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UUserADUser" Association="Self.FK_UUserADUser">
-            <End Role="UUsers" EntitySet="UUsers" />
-            <End Role="ADUsers" EntitySet="ADUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UUserISDAVSUser" Association="Self.FK_UUserISDAVSUser">
-            <End Role="UUsers" EntitySet="UUsers" />
-            <End Role="ISDAVSUsers" EntitySet="ISDAVSUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UUserPVEmploee" Association="Self.FK_UUserPVEmploee">
-            <End Role="UUsers" EntitySet="UUsers" />
-            <End Role="PVEmploees" EntitySet="PVEmploees" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="PTRModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PTRModelStoreContainer">
+    <EntitySet Name="ADDrives" EntityType="PTRModel.Store.ADDrives" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ADFolderAccesses" EntityType="PTRModel.Store.ADFolderAccesses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ADFolders" EntityType="PTRModel.Store.ADFolders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ADUsers" EntityType="PTRModel.Store.ADUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IFunction_import" EntityType="PTRModel.Store.IFunction_import" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IFunctionAccess_import" EntityType="PTRModel.Store.IFunctionAccess_import" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IFunctionAccesses" EntityType="PTRModel.Store.IFunctionAccesses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IFunctions" EntityType="PTRModel.Store.IFunctions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ImportReports" EntityType="PTRModel.Store.ImportReports" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IQuest_import" EntityType="PTRModel.Store.IQuest_import" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IQuestAccess_import" EntityType="PTRModel.Store.IQuestAccess_import" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IQuestAccesses" EntityType="PTRModel.Store.IQuestAccesses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IQuests" EntityType="PTRModel.Store.IQuests" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ISDAVSUser_import" EntityType="PTRModel.Store.ISDAVSUser_import" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ISDAVSUsers" EntityType="PTRModel.Store.ISDAVSUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PVEmploee_import" EntityType="PTRModel.Store.PVEmploee_import" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PVEmploees" EntityType="PTRModel.Store.PVEmploees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PVHistEmploees" EntityType="PTRModel.Store.PVHistEmploees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PVProfessions" EntityType="PTRModel.Store.PVProfessions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PVStructural_import" EntityType="PTRModel.Store.PVStructural_import" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PVStructurals" EntityType="PTRModel.Store.PVStructurals" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="PTRModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UUsers" EntityType="PTRModel.Store.UUsers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ADDriveADFolder" Association="PTRModel.Store.FK_ADDriveADFolder">
+      <End Role="ADDrives" EntitySet="ADDrives" />
+      <End Role="ADFolders" EntitySet="ADFolders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ADFolderAccessADFolderAccess" Association="PTRModel.Store.FK_ADFolderAccessADFolderAccess">
+      <End Role="ADFolderAccesses" EntitySet="ADFolderAccesses" />
+      <End Role="ADFolderAccesses1" EntitySet="ADFolderAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ADFolderADFolderAccess" Association="PTRModel.Store.FK_ADFolderADFolderAccess">
+      <End Role="ADFolders" EntitySet="ADFolders" />
+      <End Role="ADFolderAccesses" EntitySet="ADFolderAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ADUserADFolderAccess" Association="PTRModel.Store.FK_ADUserADFolderAccess">
+      <End Role="ADUsers" EntitySet="ADUsers" />
+      <End Role="ADFolderAccesses" EntitySet="ADFolderAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ADParentFolderADFolder" Association="PTRModel.Store.FK_ADParentFolderADFolder">
+      <End Role="ADFolders" EntitySet="ADFolders" />
+      <End Role="ADFolders1" EntitySet="ADFolders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UUserADUser" Association="PTRModel.Store.FK_UUserADUser">
+      <End Role="UUsers" EntitySet="UUsers" />
+      <End Role="ADUser" EntitySet="ADUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FunctionAccessFunction" Association="PTRModel.Store.FK_FunctionAccessFunction">
+      <End Role="IFunctions" EntitySet="IFunctions" />
+      <End Role="IFunctionAccesses" EntitySet="IFunctionAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FunctionAccessQuestAccess" Association="PTRModel.Store.FK_FunctionAccessQuestAccess">
+      <End Role="IFunctionAccesses" EntitySet="IFunctionAccesses" />
+      <End Role="IQuestAccess" EntitySet="IQuestAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ISDAVS_UserFunctionAccess" Association="PTRModel.Store.FK_ISDAVS_UserFunctionAccess">
+      <End Role="ISDAVSUsers" EntitySet="ISDAVSUsers" />
+      <End Role="IFunctionAccesses" EntitySet="IFunctionAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestAccessQuest" Association="PTRModel.Store.FK_QuestAccessQuest">
+      <End Role="IQuests" EntitySet="IQuests" />
+      <End Role="IQuestAccesses" EntitySet="IQuestAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UUserISDAVSUser" Association="PTRModel.Store.FK_UUserISDAVSUser">
+      <End Role="UUsers" EntitySet="UUsers" />
+      <End Role="ISDAVSUser" EntitySet="ISDAVSUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PV_EmploeePV_HistEmploee" Association="PTRModel.Store.FK_PV_EmploeePV_HistEmploee">
+      <End Role="PVEmploees" EntitySet="PVEmploees" />
+      <End Role="PVHistEmploees" EntitySet="PVHistEmploees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PV_ProfessionPV_Emploee" Association="PTRModel.Store.FK_PV_ProfessionPV_Emploee">
+      <End Role="PVProfessions" EntitySet="PVProfessions" />
+      <End Role="PVEmploees" EntitySet="PVEmploees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UUserPVEmploee" Association="PTRModel.Store.FK_UUserPVEmploee">
+      <End Role="UUsers" EntitySet="UUsers" />
+      <End Role="PVEmploee" EntitySet="PVEmploees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PV_ProfessionPV_HistEmploee" Association="PTRModel.Store.FK_PV_ProfessionPV_HistEmploee">
+      <End Role="PVProfessions" EntitySet="PVProfessions" />
+      <End Role="PVHistEmploees" EntitySet="PVHistEmploees" />
+    </AssociationSet>
+    <AssociationSet Name="PVStructuralPVStructural" Association="PTRModel.Store.PVStructuralPVStructural">
+      <End Role="HeadDepartment" EntitySet="PVStructurals" />
+      <End Role="Part" EntitySet="PVStructurals" />
+    </AssociationSet>
+    <AssociationSet Name="PVEmploeePart" Association="PTRModel.Store.PVEmploeePart">
+      <End Role="PVEmploee" EntitySet="PVEmploees" />
+      <End Role="PVStructural" EntitySet="PVStructurals" />
+    </AssociationSet>
+    <AssociationSet Name="PVEmploeeDepartment" Association="PTRModel.Store.PVEmploeeDepartment">
+      <End Role="PVEmploee" EntitySet="PVEmploees" />
+      <End Role="PVStructural" EntitySet="PVStructurals" />
+    </AssociationSet>
+    <AssociationSet Name="PartPVHistEmploee" Association="PTRModel.Store.PartPVHistEmploee">
+      <End Role="PVStructural" EntitySet="PVStructurals" />
+      <End Role="PVHistEmploee" EntitySet="PVHistEmploees" />
+    </AssociationSet>
+    <AssociationSet Name="DepartmentPVHistEmploee" Association="PTRModel.Store.DepartmentPVHistEmploee">
+      <End Role="PVStructural" EntitySet="PVStructurals" />
+      <End Role="PVHistEmploee" EntitySet="PVHistEmploees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ADDrives">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Path" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ADFolderAccesses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FolderID" Type="int" Nullable="false" />
+    <Property Name="FileSystemRights_" Type="int" Nullable="true" />
+    <Property Name="From" Type="datetime" Nullable="true" />
+    <Property Name="To" Type="datetime" Nullable="true" />
+    <Property Name="ParentFolderAccessId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ADFolders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentFolderId" Type="int" Nullable="true" />
+    <Property Name="DriveId" Type="int" Nullable="false" />
+    <Property Name="FullPath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SubHash" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsRootFolder" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ADUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="DN" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UUserId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="IFunction_import">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Type" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Type" Type="bit" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Description" Type="varchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="IFunctionAccess_import">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="FunctionId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FunctionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IFunctionAccesses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="FunctionId" Type="int" Nullable="false" />
+    <Property Name="From" Type="datetime" Nullable="true" />
+    <Property Name="To" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="IFunctions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Type" Type="bit" Nullable="false" />
+    <Property Name="Name" Type="nchar" Nullable="false" MaxLength="100" />
+    <Property Name="Description" Type="nchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="ImportReports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NewRecord" Type="int" Nullable="false" />
+    <Property Name="Table" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RecordId" Type="int" Nullable="false" />
+    <Property Name="Hide" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IQuest_import">
+    <Key>
+      <PropertyRef Name="quest_id" />
+    </Key>
+    <Property Name="quest_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="80" />
+    <Property Name="name_eng" Type="varchar" Nullable="true" MaxLength="80" />
+    <Property Name="q_index" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="IQuestAccess_import">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="FunctionAccessId" />
+      <PropertyRef Name="QuestId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="FunctionAccessId" Type="int" Nullable="false" />
+    <Property Name="QuestId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IQuestAccesses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="FunctionAccessId" Type="int" Nullable="false" />
+    <Property Name="QuestId" Type="int" Nullable="false" />
+    <Property Name="From" Type="datetime" Nullable="true" />
+    <Property Name="To" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="IQuests">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="true" />
+    <Property Name="Index" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ISDAVSUser_import">
+    <Key>
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="user_login_name" />
+      <PropertyRef Name="user_name" />
+    </Key>
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="user_login_name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="user_surname" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="user_phone" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="user_email" Type="varchar" Nullable="true" MaxLength="300" />
+    <Property Name="user_horizon_id" Type="int" Nullable="true" />
+    <Property Name="user_name" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="ISDAVSUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Login" Type="nchar" Nullable="false" MaxLength="30" />
+    <Property Name="Name" Type="nchar" Nullable="false" MaxLength="30" />
+    <Property Name="Surname" Type="nchar" Nullable="true" MaxLength="50" />
+    <Property Name="Phone" Type="nchar" Nullable="true" MaxLength="20" />
+    <Property Name="Email" Type="nchar" Nullable="true" MaxLength="300" />
+    <Property Name="UUserId" Type="int" Nullable="true" />
+    <Property Name="NormalizedFullName" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PVEmploee_import">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Surname" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ProfessionId" Type="int" Nullable="true" />
+    <Property Name="PartId" Type="nchar" Nullable="true" MaxLength="50" />
+    <Property Name="DepartmentId" Type="nchar" Nullable="true" MaxLength="50" />
+    <Property Name="Status" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PVEmploees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NormalizedFullName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="From" Type="datetime" Nullable="true" />
+    <Property Name="To" Type="datetime" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LocalPhone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="DepartmentId" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="PartId" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ProfessionId" Type="int" Nullable="true" />
+    <Property Name="UUserId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PVHistEmploees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="From" Type="datetime" Nullable="true" />
+    <Property Name="To" Type="datetime" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LocalPhone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="DepartmentId" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="PartId" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ProfessionId" Type="int" Nullable="true" />
+    <Property Name="ChangeDate" Type="datetime" Nullable="false" />
+    <Property Name="EmploeeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PVProfessions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="PVStructural_import">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Id" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="Code" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Level" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="HeadDeptCode" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PVStructurals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Code" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Level" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="HeadDepartmentId" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="hide" Type="bit" Nullable="false" />
+    <Property Name="NormalizedFullName" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_ADDriveADFolder">
+    <End Role="ADDrives" Type="PTRModel.Store.ADDrives" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ADFolders" Type="PTRModel.Store.ADFolders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADDrives">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ADFolders">
+        <PropertyRef Name="DriveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ADFolderAccessADFolderAccess">
+    <End Role="ADFolderAccesses" Type="PTRModel.Store.ADFolderAccesses" Multiplicity="0..1" />
+    <End Role="ADFolderAccesses1" Type="PTRModel.Store.ADFolderAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADFolderAccesses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ADFolderAccesses1">
+        <PropertyRef Name="ParentFolderAccessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ADFolderADFolderAccess">
+    <End Role="ADFolders" Type="PTRModel.Store.ADFolders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ADFolderAccesses" Type="PTRModel.Store.ADFolderAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADFolders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ADFolderAccesses">
+        <PropertyRef Name="FolderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ADUserADFolderAccess">
+    <End Role="ADUsers" Type="PTRModel.Store.ADUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ADFolderAccesses" Type="PTRModel.Store.ADFolderAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ADFolderAccesses">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ADParentFolderADFolder">
+    <End Role="ADFolders" Type="PTRModel.Store.ADFolders" Multiplicity="0..1" />
+    <End Role="ADFolders1" Type="PTRModel.Store.ADFolders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADFolders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ADFolders1">
+        <PropertyRef Name="ParentFolderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UUserADUser">
+    <End Role="UUsers" Type="PTRModel.Store.UUsers" Multiplicity="0..1" />
+    <End Role="ADUser" Type="PTRModel.Store.ADUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ADUser">
+        <PropertyRef Name="UUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FunctionAccessFunction">
+    <End Role="IFunctions" Type="PTRModel.Store.IFunctions" Multiplicity="1" />
+    <End Role="IFunctionAccesses" Type="PTRModel.Store.IFunctionAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IFunctions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IFunctionAccesses">
+        <PropertyRef Name="FunctionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FunctionAccessQuestAccess">
+    <End Role="IFunctionAccesses" Type="PTRModel.Store.IFunctionAccesses" Multiplicity="1" />
+    <End Role="IQuestAccess" Type="PTRModel.Store.IQuestAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IFunctionAccesses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IQuestAccess">
+        <PropertyRef Name="FunctionAccessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ISDAVS_UserFunctionAccess">
+    <End Role="ISDAVSUsers" Type="PTRModel.Store.ISDAVSUsers" Multiplicity="1" />
+    <End Role="IFunctionAccesses" Type="PTRModel.Store.IFunctionAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ISDAVSUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IFunctionAccesses">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestAccessQuest">
+    <End Role="IQuests" Type="PTRModel.Store.IQuests" Multiplicity="1" />
+    <End Role="IQuestAccesses" Type="PTRModel.Store.IQuestAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IQuests">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IQuestAccesses">
+        <PropertyRef Name="QuestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UUserISDAVSUser">
+    <End Role="UUsers" Type="PTRModel.Store.UUsers" Multiplicity="0..1" />
+    <End Role="ISDAVSUser" Type="PTRModel.Store.ISDAVSUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ISDAVSUser">
+        <PropertyRef Name="UUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PV_EmploeePV_HistEmploee">
+    <End Role="PVEmploees" Type="PTRModel.Store.PVEmploees" Multiplicity="1" />
+    <End Role="PVHistEmploees" Type="PTRModel.Store.PVHistEmploees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PVEmploees">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVHistEmploees">
+        <PropertyRef Name="EmploeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PV_ProfessionPV_Emploee">
+    <End Role="PVProfessions" Type="PTRModel.Store.PVProfessions" Multiplicity="0..1" />
+    <End Role="PVEmploees" Type="PTRModel.Store.PVEmploees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PVProfessions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVEmploees">
+        <PropertyRef Name="ProfessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UUserPVEmploee">
+    <End Role="UUsers" Type="PTRModel.Store.UUsers" Multiplicity="0..1" />
+    <End Role="PVEmploee" Type="PTRModel.Store.PVEmploees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVEmploee">
+        <PropertyRef Name="UUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PV_ProfessionPV_HistEmploee">
+    <End Role="PVProfessions" Type="PTRModel.Store.PVProfessions" Multiplicity="0..1" />
+    <End Role="PVHistEmploees" Type="PTRModel.Store.PVHistEmploees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PVProfessions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVHistEmploees">
+        <PropertyRef Name="ProfessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PVStructuralPVStructural">
+    <End Role="HeadDepartment" Type="PTRModel.Store.PVStructurals" Multiplicity="0..1" />
+    <End Role="Part" Type="PTRModel.Store.PVStructurals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HeadDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Part">
+        <PropertyRef Name="HeadDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PVEmploeePart">
+    <End Role="PVEmploee" Type="PTRModel.Store.PVEmploees" Multiplicity="*" />
+    <End Role="PVStructural" Type="PTRModel.Store.PVStructurals" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PVStructural">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVEmploee">
+        <PropertyRef Name="PartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PVEmploeeDepartment">
+    <End Role="PVEmploee" Type="PTRModel.Store.PVEmploees" Multiplicity="*" />
+    <End Role="PVStructural" Type="PTRModel.Store.PVStructurals" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PVStructural">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVEmploee">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PartPVHistEmploee">
+    <End Role="PVStructural" Type="PTRModel.Store.PVStructurals" Multiplicity="0..1" />
+    <End Role="PVHistEmploee" Type="PTRModel.Store.PVHistEmploees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PVStructural">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVHistEmploee">
+        <PropertyRef Name="PartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DepartmentPVHistEmploee">
+    <End Role="PVStructural" Type="PTRModel.Store.PVStructurals" Multiplicity="0..1" />
+    <End Role="PVHistEmploee" Type="PTRModel.Store.PVHistEmploees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PVStructural">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PVHistEmploee">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PTRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1581,17 +1576,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetGroupedPVStructurals" FunctionName="PTRModel.Store.GetGroupedPVStructurals">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PTRModel.GetGroupedPVStructurals1_Result1">
-                <ScalarProperty Name="DId" ColumnName="DId" />
-                <ScalarProperty Name="DName" ColumnName="DName" />
-                <ScalarProperty Name="PId" ColumnName="PId" />
-                <ScalarProperty Name="PName" ColumnName="PName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UpdateAll" FunctionName="PTRModel.Store.UpdateAll" />
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
