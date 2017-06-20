@@ -1,4 +1,4 @@
-## ![Logo](Logo.png) PTR - Piekïûves Tiesîbas Registrs
+## ![Logo](Logo.png) PTR - PiekÄ¼Å«ves TiesÄ«bas Registrs
 
 This solution consists of few projects:
 * [PTR.PTRLib]()  
